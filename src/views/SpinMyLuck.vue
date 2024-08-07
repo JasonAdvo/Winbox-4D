@@ -458,7 +458,7 @@ export default {
 
 
 .luckyspin_bg {
-	background-color: #CF2E2E;
+	background-color: #6EC1E4;
 	color: white;
 	height: 130px;
 	display: flex;
@@ -537,7 +537,7 @@ export default {
 }
 
 .navbar-toggler {
-	color: #CF2E2E;
+	color: #6EC1E4;
 	border: none;
 }
 
@@ -547,7 +547,7 @@ export default {
 }
 
 .navbar-toggler {
-	color: #CF2E2E;
+	color: #6EC1E4;
 	border: none;
 }
 
@@ -584,7 +584,7 @@ export default {
 }
 
 .num4d {
-	background-color: #CF2E2E;
+	background-color: #6EC1E4;
 	color: white;
 	height: 48px;
 	width: 50%;
@@ -603,7 +603,7 @@ export default {
 	display: flex;
 	justify-content: center;
 	background-color: #ffffff;
-	border: 2px solid #CF2E2E;
+	border: 2px solid #6EC1E4;
 	height: 250px;
 	align-items: center;
 	width: 90%;
@@ -622,7 +622,7 @@ export default {
 	width: 10%;
 	height: 29%;
 	overflow: hidden;
-	border: 2px solid #CF2E2E;
+	border: 2px solid #6EC1E4;
 	margin: 0 3px;
 	border-radius: 10px;
 }
@@ -642,7 +642,7 @@ export default {
 	margin-bottom: 15px;
 	margin-top: 20px;
 	padding: 10px 20px;
-	background-color: #CF2E2E;
+	background-color: #6EC1E4;
 	color: white;
 	border: 2px solid white;
 	border-radius: 109px;
@@ -660,7 +660,7 @@ export default {
 }
 
 button:hover {
-	background-color: #CF2E2E;
+	background-color: #6EC1E4;
 }
 
 button:disabled {
@@ -761,12 +761,12 @@ p {
 }
 
 .go_up_btn :hover {
-	color: #CF2E2E;
+	color: #6EC1E4;
 	opacity: 1;
 }
 
 .go_up_btn a {
-	color: #CF2E2E;
+	color: #6EC1E4;
 }
 
 @media screen and (min-width:1440px) {

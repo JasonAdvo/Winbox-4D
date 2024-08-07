@@ -572,7 +572,7 @@ export default {
 }
 
 .navbar-toggler {
-	color: #CF2E2E;
+	color: #6EC1E4;
 	border: none;
 }
 
@@ -625,7 +625,7 @@ export default {
 }
 
 .image-container.active {
-	border: 2px solid rgb(207, 46, 46);
+	border: 2px solid #6EC1E4;
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
 }
 
@@ -951,12 +951,12 @@ export default {
 }
 
 .go_up_btn :hover {
-	color: #CF2E2E;
+	color: #6EC1E4;
 	opacity: 1;
 }
 
 .go_up_btn a {
-	color: #CF2E2E;
+	color: #6EC1E4;
 }
 
 @media screen and (min-width:1440px) {

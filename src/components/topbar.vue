@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<div class="top-bar" style="background-color: #CF2E2E;">
+		<div class="top-bar" style="background-color: #6EC1E4;">
 			<div class="full-width plr-20">
 				<div class="top">
 					<div class="display-img" id="display-img">
@@ -83,9 +83,8 @@
 
 					<a href="/">
 						<div class="Logo_4D">
-							<img class="d_num_logo" style="width: 80px; margin-right: -15px;"
-								src="/image/4D-lottery-single.png">
-							<img class="d_num_title" width="100" src="/image/4D-lottery-wording.png">
+							<img class="d_num_logo" style="margin-right: -15px;" src="/image/Winbox_logo.webp">
+							<!-- <img class="d_num_title" width="100" src="/image/4D-lottery-wording.png"> -->
 						</div>
 					</a>
 
@@ -274,7 +273,7 @@ export default {
 .d_num_logo {
 	width: 35px;
 	height: auto;
-	border-radius: 50%;
+	/* border-radius: 50%; */
 }
 
 .top-bar {
@@ -484,9 +483,9 @@ export default {
 
 .refresh-icon {
 	font-size: 24px;
-	color: #CF2E2E;
+	color: #6EC1E4;
 	background-color: #FFFFFF;
-	border: 2px solid #CF2E2E;
+	border: 2px solid #6EC1E4;
 	border-radius: 50%;
 	padding: 10px;
 	width: 50px;
@@ -500,7 +499,7 @@ export default {
 
 .refresh-arrow {
 	display: contents;
-	color: #CF2E2E;
+	color: #6EC1E4;
 	align-self: center;
 }
 
@@ -517,12 +516,12 @@ export default {
 }
 
 .navbar-toggler {
-	color: #CF2E2E;
+	color: #6EC1E4;
 	border: none;
 }
 
 .active {
-	color: rgb(207, 46, 46) !important;
+	color: #6EC1E4 !important;
 	font-weight: 700;
 }
 
@@ -541,7 +540,7 @@ export default {
 }
 
 .logo_col .logo.active {
-	border: 2px solid rgb(207, 46, 46);
+	border: 2px solid #6EC1E4;
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
 }
 </style>

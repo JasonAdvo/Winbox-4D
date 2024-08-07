@@ -889,7 +889,7 @@ export default {
 }
 
 .active {
-	color: rgb(207, 46, 46) !important;
+	color: #6EC1E4 !important;
 	font-weight: 700;
 }
 </style>

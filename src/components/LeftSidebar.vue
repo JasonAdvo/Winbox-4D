@@ -2,10 +2,10 @@
 	<div class="left-sidebar">
 		<div class="container-fluid">
 			<!--leftside-->
-			<div class="sidebar" style="background-color: #CF2E2E;">
+			<div class="sidebar" style="background-color: #6EC1E4;">
 				<div style="background: white; height: 100%; border-top-right-radius: 50px;">
 					<div class="logo_col">
-						<img class="d_num_logo" src="/image/4D-lottery-wording.png">
+						<img class="d_num_logo" src="/image/Winbox_logo.webp">
 					</div>
 					<div class="sidebar-main">
 						<p class="results_install_app_text">{{ $t('Sidebar.Result') }}</p>
@@ -14,7 +14,7 @@
 							<div class="text_col">
 								<router-link to="/" exact active-class="active-link">
 									<img class="pic" :src="imageSrcForTab('dashboard')">
-									<p :style="{ color: activeTab === 'dashboard' ? 'rgb(207, 46, 46)' : '', fontWeight: activeTab === 'dashboard' ? '700' : 'normal' }"
+									<p :style="{ color: activeTab === 'dashboard' ? '#007BD2' : '', fontWeight: activeTab === 'dashboard' ? '700' : 'normal' }"
 										class="text_menu">{{ $t('Sidebar.Dashboard') }}</p>
 								</router-link>
 							</div>
@@ -26,7 +26,7 @@
 							<div class="text_col">
 								<router-link to="/spin-my-luck" exact active-class="active-link">
 									<img class="pic" :src="imageSrcForTab('spin')">
-									<p :style="{ color: activeTab === 'spin' ? 'rgb(207, 46, 46)' : '', fontWeight: activeTab === 'spin' ? '700' : 'normal' }"
+									<p :style="{ color: activeTab === 'spin' ? '#007BD2' : '', fontWeight: activeTab === 'spin' ? '700' : 'normal' }"
 										class="text_menu">{{ $t('Sidebar.Spin My Luck') }}</p>
 								</router-link>
 							</div>
@@ -36,7 +36,7 @@
 							<div class="text_col">
 								<router-link to="/lucky-book" exact active-class="active-link">
 									<img class="pic" :src="imageSrcForTab('book')">
-									<p :style="{ color: activeTab === 'book' ? 'rgb(207, 46, 46)' : '', fontWeight: activeTab === 'book' ? '700' : 'normal' }"
+									<p :style="{ color: activeTab === 'book' ? '#007BD2' : '', fontWeight: activeTab === 'book' ? '700' : 'normal' }"
 										class="text_menu">{{ $t('Sidebar.Lucky Book') }}</p>
 								</router-link>
 							</div>
@@ -99,7 +99,7 @@ export default {
 
 .d_num_logo {
 	padding-top: 20px;
-	width: 120px;
+	width: 60px;
 	height: auto;
 }
 
@@ -201,7 +201,7 @@ export default {
 }
 
 .active-link .text_menu {
-	color: rgb(207, 46, 46);
+	color: #007BD2;
 	font-weight: 700 !important;
 }
 </style>

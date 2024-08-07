@@ -284,7 +284,7 @@ export default {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	background-color: #cf2e2e;
+	background-color: #6EC1E4;
 	color: white;
 	padding: 10px 20px;
 }
@@ -372,7 +372,7 @@ p {
 
 
 .dictionary {
-	background-color: #CF2E2E;
+	background-color: #6EC1E4;
 	color: white;
 	height: 130px;
 	display: flex;
@@ -443,7 +443,7 @@ p {
 .search-button {
 	padding: 10px 20px;
 	border: none;
-	background-color: #cf2e2e;
+	background-color: #6EC1E4;
 	color: white;
 	border-radius: 5px;
 	cursor: pointer;
@@ -452,7 +452,7 @@ p {
 }
 
 .search-button:hover {
-	background-color: #cf2e2e;
+	background-color: #6EC1E4;
 }
 
 /* Custom Dropdown Styles */
@@ -465,12 +465,12 @@ p {
 	position: relative;
 	width: 100%;
 	cursor: pointer;
-	background-color: #cf2e2e;
+	background-color: #6EC1E4;
 	border-radius: 10px;
 }
 
 .dropdown-selected {
-	background-color: #cf2e2e;
+	background-color: #6EC1E4;
 	padding: 10px;
 	border-radius: 5px;
 	color: white;
@@ -483,7 +483,7 @@ p {
 	left: 0;
 	width: 100%;
 	background-color: white;
-	border: solid #cf2e2e;
+	border: solid #6EC1E4;
 	border-radius: 5px;
 	max-height: 150px;
 	/* Show 7 options */
@@ -521,12 +521,12 @@ p {
 }
 
 .go_up_btn :hover {
-	color: #CF2E2E;
+	color: #6EC1E4;
 	opacity: 1;
 }
 
 .go_up_btn a {
-	color: #CF2E2E;
+	color: #6EC1E4;
 }
 
 @media screen and (min-width:1440px) {

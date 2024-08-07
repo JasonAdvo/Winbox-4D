@@ -135,7 +135,7 @@ export default {
 }
 
 .active {
-	color: rgb(207, 46, 46) !important;
+	color: #007BD2 !important;
 	font-weight: 700;
 }
 </style>

@@ -127,6 +127,6 @@ h6 {
 }
 
 .expired {
-	color: red;
+	color: #6EC1E4;
 }
 </style>

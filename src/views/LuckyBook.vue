@@ -433,7 +433,7 @@ export default {
 }
 
 .title {
-	background-color: #CF2E2E;
+	background-color: #6EC1E4;
 	color: white;
 	height: 130px;
 	display: flex;
@@ -521,7 +521,7 @@ export default {
 .search_btn {
 	padding: 10px 20px;
 	border: none;
-	background-color: #CF2e2e;
+	background-color: #6EC1E4;
 	color: white;
 	border-radius: 5px;
 	cursor: pointer;
@@ -530,7 +530,7 @@ export default {
 }
 
 .close_btn {
-	color: #CF2E2E;
+	color: #6EC1E4;
 	border: none;
 	background-color: white;
 	position: absolute;
@@ -569,7 +569,7 @@ export default {
 }
 
 .lucky_col {
-	background-color: #cf2e2e;
+	background-color: #6EC1E4;
 	text-align: center;
 	padding-top: 10px;
 	width: 95%;
@@ -658,7 +658,7 @@ export default {
 }
 
 .nav-tabs .nav-link.active {
-	background-color: #cf2e2e;
+	background-color: #6EC1E4;
 	color: white;
 	font-weight: bolder;
 
@@ -672,7 +672,7 @@ export default {
 
 .nav-tabs .nav-item.show .nav-link,
 .nav-tabs .nav-link.active {
-	border-bottom: 2px solid #cf2e2e;
+	border-bottom: 2px solid #6EC1E4;
 }
 
 .nav-tabs {
@@ -715,7 +715,7 @@ p {
 }
 
 .search_title {
-	background-color: #cf2e2e;
+	background-color: #6EC1E4;
 	color: white;
 	text-align: center;
 	width: 75%;
@@ -785,17 +785,17 @@ p {
 	background-color: #ffffff;
 	border-radius: 50px;
 	opacity: 0.8;
-	color: #CF2E2E;
+	color: #6EC1E4;
 
 }
 
 .go_up_btn :hover {
-	color: #CF2E2E;
+	color: #6EC1E4;
 	opacity: 1;
 }
 
 .go_up_btn a {
-	color: #CF2E2E;
+	color: #6EC1E4;
 }
 
 @media screen and (min-width:1440px) {

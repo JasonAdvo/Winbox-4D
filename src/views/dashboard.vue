@@ -6,10 +6,9 @@
 				<TopBar />
 			</div>
 			<div class="popUp">
-				<img :class="{ 'popUp': !showLoadingScreen }" src="/image/4D_favicon.webp" alt="Loading" />
+				<img :class="{ 'popUp': !showLoadingScreen }" src="/image/dabehgong-part.gif" alt="dabehgong" />
 			</div>
 		</div>
-
 		<!-- Main Content -->
 		<div v-show="!showLoadingScreen">
 			<MobileView v-if="isMobile" @data-fetched="handleDataFetched" />
@@ -95,14 +94,19 @@ export default {
 }
 
 .loading-screen img {
-	max-width: 100px;
+	/* max-width: 100px; */
 	/* Adjust the image size as needed */
 	transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
+.popUp {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
 .popUp img {
-	animation: bounceUpDown 1s ease-out infinite;
-	/* Increased duration to 1s */
+	width: 400px;
 }
 
 @keyframes bounceUpDown {
