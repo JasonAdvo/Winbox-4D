@@ -9,38 +9,42 @@
 					</div>
 					<div class="sidebar-main">
 						<p class="results_install_app_text">{{ $t('Sidebar.Result') }}</p>
-						<div class="menu">
-							<!-- Dashboard -->
-							<div class="text_col">
-								<router-link to="/" exact active-class="active-link">
+						<!-- Dashboard -->
+						<router-link to="/" exact active-class="active-link">
+							<div class="menu"
+								:style="{ backgroundColor: activeTab === 'dashboard' ? 'rgb(0, 123, 210, 0.2)' : '' }">
+								<div class="text_col">
 									<img class="pic" :src="imageSrcForTab('dashboard')">
 									<p :style="{ color: activeTab === 'dashboard' ? '#007BD2' : '', fontWeight: activeTab === 'dashboard' ? '700' : 'normal' }"
 										class="text_menu">{{ $t('Sidebar.Dashboard') }}</p>
-								</router-link>
+								</div>
 							</div>
-						</div>
+						</router-link>
 						<br>
 						<p class="toolbox_text">{{ $t('Sidebar.ToolBox') }}</p>
 						<!-- Spin My Luck -->
-						<div class="menu">
-							<div class="text_col">
-								<router-link to="/spin-my-luck" exact active-class="active-link">
+						<router-link to="/spin-my-luck" exact active-class="active-link">
+							<div class="menu"
+								:style="{ backgroundColor: activeTab === 'spin' ? 'rgb(0, 123, 210, 0.2)' : '' }">
+								<div class="text_col">
 									<img class="pic" :src="imageSrcForTab('spin')">
 									<p :style="{ color: activeTab === 'spin' ? '#007BD2' : '', fontWeight: activeTab === 'spin' ? '700' : 'normal' }"
 										class="text_menu">{{ $t('Sidebar.Spin My Luck') }}</p>
-								</router-link>
+								</div>
 							</div>
-						</div>
+
+						</router-link>
 						<!-- Lucky Book -->
-						<div class="menu">
-							<div class="text_col">
-								<router-link to="/lucky-book" exact active-class="active-link">
+						<router-link to="/lucky-book" exact active-class="active-link">
+							<div class="menu"
+								:style="{ backgroundColor: activeTab === 'book' ? 'rgb(0, 123, 210, 0.2)' : '' }">
+								<div class="text_col">
 									<img class="pic" :src="imageSrcForTab('book')">
 									<p :style="{ color: activeTab === 'book' ? '#007BD2' : '', fontWeight: activeTab === 'book' ? '700' : 'normal' }"
 										class="text_menu">{{ $t('Sidebar.Lucky Book') }}</p>
-								</router-link>
+								</div>
 							</div>
-						</div>
+						</router-link>
 					</div>
 				</div>
 			</div>
@@ -152,7 +156,7 @@ export default {
 }
 
 .menu:hover {
-	background-color: rgb(243, 243, 243);
+	background-color: rgb(0, 123, 210, 0.2);
 }
 
 .sidebar ul li {
