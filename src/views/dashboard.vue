@@ -23,7 +23,6 @@
 <script>
 import MobileView from '/src/components/dashboard_Mobile.vue';
 import DesktopView from '/src/components/dashboard_Web.vue';
-import DotLoading from '@/components/DotLoading.vue'; // Adjust the path as needed
 import TopBar from '/src/components/topbar.vue';
 
 export default {
@@ -40,7 +39,6 @@ export default {
 		MobileView,
 		DesktopView,
 		TopBar,
-		DotLoading
 	},
 	mounted() {
 		this.checkScreenSize();
