@@ -21,7 +21,8 @@
 </template>
 
 <script>
-import MobileView from '/src/components/dashboard_Mobile.vue';
+// import MobileView from '/src/components/dashboard_Mobile.vue';
+import MobileView from '/src/components/dashboard_Mobile_v2.vue';
 import DesktopView from '/src/components/dashboard_Web.vue';
 import TopBar from '/src/components/topbar.vue';
 
