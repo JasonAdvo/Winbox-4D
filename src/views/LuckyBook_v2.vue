@@ -146,45 +146,111 @@
 			<div class="row img">
 
 				<!-- Tua Pek Kong (Wan) -->
-				<div class="col-12 col-sm-12 col-md-6 col-lg-4">
-
-					<div class="btn_col">
-						<button class="btn_bg">
-							<a href="/lucky-book/tuapekkongwan">
-								{{ $t('LuckyBook.Enter') }}
+				<div class="hover_container col-12 col-sm-12 col-md-6 col-lg-4">
+					<div class="book_container">
+						<div class="book_card_S" />
+						<div class="book_img_container">
+							<a href="/lucky-book/tuapekkongwan"><img class="lucky_book_title"
+									src="/image/TuaPekKongWanZi.webp" alt="Tua Pek Kong Wan Zi">
 							</a>
-						</button>
+							<a href="/lucky-book/tuapekkongwan"><img class="luck_book_img"
+									src="/image/TuaPekKongWan.svg" alt="Tua Pek Kong">
+							</a>
+						</div>
+						<div class="book_text_container">
+							<div class="top_text_container">
+								<a href="/lucky-book/tuapekkongwan">
+									{{ $t('LuckyBook.Tua Pek Kong (Wan) Dictionary') }}
+								</a>
+							</div>
+							<div class="btm_text_container">
+								<a href="/lucky-book/tuapekkongwan">
+									(WZT)
+								</a>
+							</div>
+						</div>
 					</div>
+					<a href="/lucky-book/tuapekkongwan">
+						<div class="btn_col">
+							<button class="btn_bg">
 
+								{{ $t('LuckyBook.Enter') }}
+
+							</button>
+						</div>
+					</a>
 				</div>
 
 				<!-- Guan Yin Ma -->
-				<div class="col-12 col-sm-12 col-md-6 col-lg-4">
-
-					<div class="btn_col">
-						<button class="btn_bg">
-							<a href="/lucky-book/guanyin">
-								{{ $t('LuckyBook.Enter') }}
+				<div class="hover_container col-12 col-sm-12 col-md-6 col-lg-4">
+					<div class="book_container">
+						<div class="book_card_S" />
+						<div class="book_img_container">
+							<a href="/lucky-book/guanyin"><img class="lucky_book_title" src="/image/GuanYinQianZi.webp"
+									alt="Tua Pek Kong Wan Zi">
 							</a>
-						</button>
+							<a href="/lucky-book/guanyin"><img class="luck_book_img" src="/image/GuanYinQian.svg"
+									alt="Tua Pek Kong">
+							</a>
+						</div>
+						<div class="book_text_container">
+							<div class="top_text_container">
+								<a href="/lucky-book/guanyin">
+									{{ $t('LuckyBook.Guan Yin Ma Dictionary') }}
+								</a>
+							</div>
+							<div class="btm_text_container">
+								<a href="/lucky-book/guanyin">
+									(GZT)
+								</a>
+							</div>
+						</div>
 					</div>
+					<a href="/lucky-book/guanyin">
+						<div class="btn_col">
+							<button class="btn_bg">
 
+								{{ $t('LuckyBook.Enter') }}
+
+							</button>
+						</div>
+					</a>
 				</div>
 
 				<!-- Tua Pek Kong (Qian) -->
-				<div class="col-12 col-sm-12 col-md-6 col-lg-4">
-
-					<div class="btn_col">
-						<button class="btn_bg">
-							<a href="/lucky-book/tuapekkongqian">
-								{{ $t('LuckyBook.Enter') }}
+				<div class="hover_container col-12 col-sm-12 col-md-6 col-lg-4">
+					<div class="book_container">
+						<div class="book_card_S" />
+						<div class="book_img_container">
+							<a href="/lucky-book/tuapekkongqian"><img class="lucky_book_title"
+									src="/image/TuaPekKongQianZi.webp" alt="Tua Pek Kong Wan Zi">
 							</a>
-						</button>
+							<a href="/lucky-book/tuapekkongqian"><img class="luck_book_img"
+									src="/image/TuaPekKongQian.svg" alt="Tua Pek Kong">
+							</a>
+						</div>
+						<div class="book_text_container">
+							<div class="top_text_container">
+								<a href="/lucky-book/tuapekkongqian">
+									{{ $t('LuckyBook.Tua Pek Kong (Qian) Dictionary') }}
+								</a>
+							</div>
+							<div class="btm_text_container">
+								<a href="/lucky-book/tuapekkongqian">
+									(QZT)
+								</a>
+							</div>
+						</div>
 					</div>
-
+					<a href="/lucky-book/tuapekkongqian">
+						<div class="btn_col">
+							<button class="btn_bg">
+								{{ $t('LuckyBook.Enter') }}
+							</button>
+						</div>
+					</a>
 				</div>
 			</div>
-
 		</div>
 
 		<!--go up botton-->
@@ -754,5 +820,121 @@ p {
 	.Content-mobile-view {
 		display: none;
 	}
+}
+
+.img {
+	margin-inline: 206px;
+	margin-top: 85px;
+	margin-bottom: 20px;
+}
+
+@media screen and (max-width: 1030px) {
+	.img {
+		margin-inline: 100px;
+	}
+}
+
+@media screen and (max-width: 769px) {
+	.img {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		margin-inline: unset;
+	}
+}
+
+.book_container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	position: relative;
+	margin-bottom: 20px;
+	height: 350px;
+}
+
+.book_card_S {
+	width: 235px;
+	height: 240px;
+	background-color: #6EC1E4;
+	border-radius: 35px;
+	position: absolute;
+	bottom: 0;
+	transition: all 0.5s ease;
+	/* Smooth transition */
+}
+
+.book_card_L {
+	width: 235px;
+	height: 370px;
+	background-color: #6EC1E4;
+	border-radius: 35px;
+	position: absolute;
+	bottom: 0;
+	transition: all 0.5s ease;
+	/* Smooth transition */
+}
+
+.book_img_container {
+	width: 90%;
+	position: absolute;
+	top: -60px;
+}
+
+.book_img_container a {
+	display: flex;
+	justify-content: center;
+}
+
+.lucky_book_title {
+	width: 100%;
+	position: absolute;
+	top: 0;
+}
+
+.luck_book_img {
+	width: 90%;
+}
+
+.book_text_container {
+	text-align: center;
+	width: 100%;
+	position: absolute;
+	bottom: 15px;
+}
+
+.book_text_container a {
+	text-decoration: none;
+	color: white;
+	font-size: 14px;
+	font-weight: 700;
+}
+
+/* Initial States */
+.lucky_book_title,
+.book_text_container {
+	opacity: 0;
+	transition: all 0.5s ease;
+}
+
+.book_text_container {
+	transform: translateY(-20px);
+}
+
+/* Hover States */
+.hover_container:hover .lucky_book_title {
+	opacity: 1;
+	transition: opacity 0.5s ease;
+}
+
+.hover_container:hover .book_text_container {
+	opacity: 1;
+	transform: translateY(0);
+	transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.hover_container:hover .book_card_S {
+	height: 370px;
+	/* Change height to .book_card_L's height */
+	transition: all 0.5s ease;
 }
 </style>
