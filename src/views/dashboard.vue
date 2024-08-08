@@ -7,6 +7,9 @@
 			</div>
 			<div class="popUp">
 				<img :class="{ 'popUp': !showLoadingScreen }" src="/image/dabehgong-part.gif" alt="dabehgong" />
+				<div class="progress-bar">
+					<div class="progress-fill" :style="{ width: progressBarWidth + '%' }"></div>
+				</div>
 			</div>
 		</div>
 		<!-- Main Content -->
@@ -20,6 +23,7 @@
 <script>
 import MobileView from '/src/components/dashboard_Mobile.vue';
 import DesktopView from '/src/components/dashboard_Web.vue';
+import DotLoading from '@/components/DotLoading.vue'; // Adjust the path as needed
 import TopBar from '/src/components/topbar.vue';
 
 export default {
@@ -27,13 +31,16 @@ export default {
 		return {
 			isMobile: window.innerWidth <= 769, // Initial state based on window width
 			showLoadingScreen: true, // Track loading screen visibility
-			fetchDuration: 0 // Store the duration for hiding the loading screen
+			fetchDuration: 0, // Store the duration for hiding the loading screen
+			progressBarWidth: 0, // Progress bar width percentage
+			progressInterval: null // Store interval ID for progress bar
 		};
 	},
 	components: {
 		MobileView,
 		DesktopView,
-		TopBar
+		TopBar,
+		DotLoading
 	},
 	mounted() {
 		this.checkScreenSize();
@@ -41,6 +48,7 @@ export default {
 	},
 	beforeDestroy() {
 		window.removeEventListener('resize', this.checkScreenSize);
+		clearInterval(this.progressInterval); // Clear interval on component destruction
 	},
 	methods: {
 		checkScreenSize() {
@@ -51,25 +59,32 @@ export default {
 			// Trigger loading screen if crossing threshold
 			if (isCrossingThreshold) {
 				this.showLoadingScreen = true;
-
-				// Hide loading screen after the maximum of 0.5 seconds or fetchDuration
-				setTimeout(() => {
-					this.showLoadingScreen = false;
-				}, Math.max(this.fetchDuration * 1000)); // Convert seconds to milliseconds
+				this.startProgressBar();
 			}
 		},
 		handleDataFetched(duration) {
 			// Store the duration to be used in checkScreenSize
 			this.fetchDuration = duration;
+			this.startProgressBar();
+		},
+		startProgressBar() {
+			this.progressBarWidth = 0;
+			clearInterval(this.progressInterval); // Clear any existing interval
+			const increment = 100 / (this.fetchDuration * 20); // 20 intervals per second
 
-			// Hide loading screen after the data fetching duration
-			setTimeout(() => {
-				this.showLoadingScreen = false;
-			}, duration * 1000); // Convert seconds to milliseconds
+			this.progressInterval = setInterval(() => {
+				this.progressBarWidth += increment;
+				if (this.progressBarWidth >= 100) {
+					clearInterval(this.progressInterval);
+					this.progressBarWidth = 100; // Ensure it doesn't exceed 100%
+					this.showLoadingScreen = false; // Hide loading screen
+				}
+			}, 50); // Update every 50ms
 		}
 	},
 };
 </script>
+
 
 <style>
 @media screen and (max-width: 769px) {
@@ -103,23 +118,29 @@ export default {
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	flex-direction: column;
 }
 
 .popUp img {
-	width: 400px;
+	width: 200px;
 }
 
-@keyframes bounceUpDown {
-	0% {
-		transform: translateY(0);
-	}
+.progress-bar {
+	width: 100%;
+	height: 10px;
+	background-color: #e0e0e0;
+	/* Light grey background */
+	border-radius: 5px;
+	overflow: hidden;
+	margin-top: 20px;
+	/* Adjust spacing as needed */
+}
 
-	50% {
-		transform: translateY(-10px);
-	}
-
-	100% {
-		transform: translateY(0);
-	}
+.progress-fill {
+	height: 100%;
+	background-color: #3b82f6;
+	/* Blue color for the progress bar */
+	transition: width 0.05s ease;
+	/* Smooth transition */
 }
 </style>

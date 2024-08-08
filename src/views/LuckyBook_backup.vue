@@ -145,26 +145,103 @@
 		<div v-else>
 
 			<div class="row img">
-
 				<!-- Tua Pek Kong (Wan) -->
-				<div class="col-12 col-sm-12 col-md-6 col-lg-4">
-					<div class="lucky_col">
-						<div class="wanzititle_col">
+				<div class="container_lucky col-12 col-sm-12 col-md-6 col-lg-4" @mouseenter="isHovered = true"
+					@mouseleave="isHovered = false">
+					<div :class="['lucky_col', { lucky_col_2: isHovered }]"></div>
+					<div class="lucky_container">
+						<div class="wanzititle_col" :class="{ fadeIn: isHovered }">
 							<a href="/lucky-book/tuapekkongwan">
 								<img class="wanzititle" src="/image/TuaPekKongWanZi.webp" />
-								<img width="65%" src="/image/TuaPekKongWan.svg" @load="onWanLoaded" />
 							</a>
 						</div>
-						<div class=" text">
-							<a href="/lucky-book/tuapekkongwan" class="text">
-								{{ $t('LuckyBook.Tua Pek Kong (Wan) Dictionary') }}
-							</a>
+						<a href="/lucky-book/tuapekkongwan"
+							style="position: absolute; display: flex; justify-content: center;"><img width="75%"
+								src="/image/TuaPekKongWan.svg" @load="onWanLoaded" /></a>
 
-						</div>
-						<div class="text2">
-							<a href="/lucky-book/tuapekkongwan" class="text2">(WZT)</a>
+						<div class="text_container" :class="{ fadeInFromTop: isHovered }">
+							<div class="text">
+								<a href="/lucky-book/tuapekkongwan" class="text">
+									{{ $t('LuckyBook.Tua Pek Kong (Wan) Dictionary') }}
+								</a>
+							</div>
+							<div class="text2">
+								<a href="/lucky-book/tuapekkongwan" class="text2">(WZT)</a>
+							</div>
 						</div>
 					</div>
+
+					<br />
+					<div class="btn_col">
+						<button class="btn_bg">
+							<a href="/lucky-book/tuapekkongwan">
+								{{ $t('LuckyBook.Enter') }}
+							</a>
+						</button>
+					</div>
+					<br />
+				</div>
+				<div class="container_lucky col-12 col-sm-12 col-md-6 col-lg-4" @mouseenter="isHovered = true"
+					@mouseleave="isHovered = false">
+					<div :class="['lucky_col', { lucky_col_2: isHovered }]"></div>
+					<div class="lucky_container">
+						<div class="wanzititle_col" :class="{ fadeIn: isHovered }">
+							<a href="/lucky-book/tuapekkongwan">
+								<img class="wanzititle" src="/image/TuaPekKongWanZi.webp" />
+							</a>
+						</div>
+						<a href="/lucky-book/tuapekkongwan"
+							style="position: absolute; display: flex; justify-content: center;"><img width="75%"
+								src="/image/TuaPekKongWan.svg" @load="onWanLoaded" /></a>
+
+						<div class="text_container" :class="{ fadeInFromTop: isHovered }">
+							<div class="text">
+								<a href="/lucky-book/tuapekkongwan" class="text">
+									{{ $t('LuckyBook.Tua Pek Kong (Wan) Dictionary') }}
+								</a>
+							</div>
+							<div class="text2">
+								<a href="/lucky-book/tuapekkongwan" class="text2">(WZT)</a>
+							</div>
+						</div>
+					</div>
+
+					<br />
+					<div class="btn_col">
+						<button class="btn_bg">
+							<a href="/lucky-book/tuapekkongwan">
+								{{ $t('LuckyBook.Enter') }}
+							</a>
+						</button>
+					</div>
+					<br />
+				</div>
+
+				<div class="container_lucky col-12 col-sm-12 col-md-6 col-lg-4" @mouseenter="isHovered = true"
+					@mouseleave="isHovered = false">
+					<div :class="['lucky_col', { lucky_col_2: isHovered }]"></div>
+					<div class="lucky_container">
+						<div class="wanzititle_col" :class="{ fadeIn: isHovered }">
+							<a href="/lucky-book/tuapekkongwan">
+								<img class="wanzititle" src="/image/TuaPekKongWanZi.webp" />
+							</a>
+						</div>
+						<a href="/lucky-book/tuapekkongwan"
+							style="position: absolute; display: flex; justify-content: center;"><img width="75%"
+								src="/image/TuaPekKongWan.svg" @load="onWanLoaded" /></a>
+
+						<div class="text_container" :class="{ fadeInFromTop: isHovered }">
+							<div class="text">
+								<a href="/lucky-book/tuapekkongwan" class="text">
+									{{ $t('LuckyBook.Tua Pek Kong (Wan) Dictionary') }}
+								</a>
+							</div>
+							<div class="text2">
+								<a href="/lucky-book/tuapekkongwan" class="text2">(WZT)</a>
+							</div>
+						</div>
+					</div>
+
 					<br />
 					<div class="btn_col">
 						<button class="btn_bg">
@@ -177,22 +254,22 @@
 				</div>
 
 				<!-- Guan Yin Ma -->
-				<div class="col-12 col-sm-12 col-md-6 col-lg-4">
+				<!-- <div class="col-12 col-sm-12 col-md-6 col-lg-4">
 
 					<div class="lucky_col">
 						<div class="wanzititle_col">
 							<a href="/lucky-book/guanyin">
-								<img class="wanzititle" src="/image/GuanYinQianZi.webp" />
-								<img width="65%" src="/image/GuanYinQian.svg" />
+								<img class="wanzititle fade-in-hover" src="/image/GuanYinQianZi.webp" />
+								<img width="75%" src="/image/GuanYinQian.svg" />
 							</a>
 						</div>
-						<div class="text">
-							<a href="/lucky-book/guanyin" class="text">
+						<div class="text fade-in-hover">
+							<a href="/lucky-book/guanyin " class="text">
 								{{ $t('LuckyBook.Guan Yin Ma Dictionary') }}
 							</a>
 
 						</div>
-						<div class="text2">
+						<div class="text2 fade-in-hover">
 							<a href="/lucky-book/guanyin" class="text2">(GZT)</a>
 						</div>
 					</div>
@@ -206,24 +283,24 @@
 					</div>
 					<br />
 
-				</div>
+				</div> -->
 
 				<!-- Tua Pek Kong (Qian) -->
-				<div class="col-12 col-sm-12 col-md-6 col-lg-4">
+				<!-- <div class="col-12 col-sm-12 col-md-6 col-lg-4">
 
 
 					<div class="lucky_col">
 						<div class="wanzititle_col">
 							<a href="/lucky-book/tuapekkongqian">
-								<img class="wanzititle" src="/image/TuaPekKongQianZi.webp" />
-								<img width="65%" src="/image/TuaPekKongQian.svg" />
+								<img class="wanzititle fade-in-hover" src="/image/TuaPekKongQianZi.webp" />
+								<img width="75%" src="/image/TuaPekKongQian.svg" />
 							</a>
 						</div>
-						<div class="text">
+						<div class="text fade-in-hover">
 							<a href="/lucky-book/tuapekkongqian" class="text">
 								{{ $t('LuckyBook.Tua Pek Kong (Qian) Dictionary') }}</a>
 						</div>
-						<div class="text2">
+						<div class="text2 fade-in-hover">
 							<a href="/lucky-book/tuapekkongqian" class="text2">(QZT)</a>
 						</div>
 
@@ -238,14 +315,9 @@
 					</div>
 					<br />
 
-				</div>
+				</div> -->
 			</div>
-
-
 		</div>
-
-
-
 
 		<!--go up botton-->
 		<div class="go_up_btn">
@@ -299,6 +371,7 @@ export default {
 			filteredDataQZT: [],
 			showIcon: false,
 			scrollTimeout: null,
+			isHovered: false,
 
 
 		};
@@ -566,22 +639,75 @@ export default {
 	text-align: -webkit-center;
 }
 
+.img {
+	display: flex;
+	justify-content: center;
+	position: relative;
+	height: 500px;
+}
+
+.container_lucky {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	position: relative;
+}
+
 .lucky_col {
-	background-color: #6EC1E4;
+	background-color: #6ec1e4;
 	text-align: center;
 	padding-top: 10px;
-	width: 95%;
-	border-radius: 10px;
+	width: 235px;
+	height: 240px;
+	border-radius: 35px;
+	position: absolute;
+	bottom: 80px;
+	transition: all 0.5s ease;
+}
 
+.lucky_col_2 {
+	height: 370px;
+}
+
+.fade-in-hover {
+	opacity: 0;
+	transition: opacity 0.5s ease-in-out;
+}
+
+.lucky_col:hover .fade-in-hover {
+	opacity: 1;
+}
+
+.wanzititle {
+	width: 82%;
+	/* position: absolute; */
+	z-index: 12;
+}
+
+.lucky_container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	position: absolute;
+	z-index: 10;
+	height: 82%;
 }
 
 .wanzititle_col {
 	position: relative;
+	opacity: 0;
+	transition: opacity 0.5s ease;
+	z-index: 9999;
 }
 
-.wanzititle {
-	width: 65%;
-	position: absolute;
+.wanzititle_col.fadeIn {
+	opacity: 1;
+	z-index: 9999 !important;
+}
+
+.wanzititle_col a {
+	display: flex;
+	justify-content: center;
 }
 
 .lucky {
@@ -607,6 +733,9 @@ export default {
 
 .btn_col {
 	text-align: center;
+	position: absolute;
+	bottom: 0;
+	width: 200px;
 }
 
 .search_col {
@@ -622,11 +751,7 @@ export default {
 	width: 100px;
 }
 
-.img {
-	text-align: -webkit-center;
-	place-content: center;
-	margin-inline: 0px;
-}
+
 
 @media screen and (min-width:1200px) {
 	.img {
@@ -641,6 +766,20 @@ export default {
 	grid-template-columns: repeat(2, 1fr);
 }
 
+.text_container {
+	margin-top: 20px;
+	position: absolute;
+	bottom: 0;
+	opacity: 0;
+	transform: translateY(-20px);
+	transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.text_container.fadeInFromTop {
+	opacity: 1;
+	transform: translateY(0);
+}
+
 .text {
 	text-align: center;
 	text-decoration: none;
@@ -649,6 +788,7 @@ export default {
 	font-size: 14px;
 	margin-top: 10px;
 	padding: 0 10px;
+	font-family: 'Roboto', sans-serif
 }
 
 .nav-tabs {

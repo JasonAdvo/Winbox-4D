@@ -143,29 +143,11 @@
 
 		<!--entry TuaPekKongWan & GuanYinMa & TuaPkeKong Qian-->
 		<div v-else>
-
 			<div class="row img">
 
 				<!-- Tua Pek Kong (Wan) -->
 				<div class="col-12 col-sm-12 col-md-6 col-lg-4">
-					<div class="lucky_col">
-						<div class="wanzititle_col">
-							<a href="/lucky-book/tuapekkongwan">
-								<img class="wanzititle" src="/image/TuaPekKongWanZi.webp" />
-								<img width="65%" src="/image/TuaPekKongWan.svg" @load="onWanLoaded" />
-							</a>
-						</div>
-						<div class=" text">
-							<a href="/lucky-book/tuapekkongwan" class="text">
-								{{ $t('LuckyBook.Tua Pek Kong (Wan) Dictionary') }}
-							</a>
 
-						</div>
-						<div class="text2">
-							<a href="/lucky-book/tuapekkongwan" class="text2">(WZT)</a>
-						</div>
-					</div>
-					<br />
 					<div class="btn_col">
 						<button class="btn_bg">
 							<a href="/lucky-book/tuapekkongwan">
@@ -173,30 +155,12 @@
 							</a>
 						</button>
 					</div>
-					<br />
+
 				</div>
 
 				<!-- Guan Yin Ma -->
 				<div class="col-12 col-sm-12 col-md-6 col-lg-4">
 
-					<div class="lucky_col">
-						<div class="wanzititle_col">
-							<a href="/lucky-book/guanyin">
-								<img class="wanzititle" src="/image/GuanYinQianZi.webp" />
-								<img width="65%" src="/image/GuanYinQian.svg" />
-							</a>
-						</div>
-						<div class="text">
-							<a href="/lucky-book/guanyin" class="text">
-								{{ $t('LuckyBook.Guan Yin Ma Dictionary') }}
-							</a>
-
-						</div>
-						<div class="text2">
-							<a href="/lucky-book/guanyin" class="text2">(GZT)</a>
-						</div>
-					</div>
-					<br />
 					<div class="btn_col">
 						<button class="btn_bg">
 							<a href="/lucky-book/guanyin">
@@ -204,31 +168,12 @@
 							</a>
 						</button>
 					</div>
-					<br />
 
 				</div>
 
 				<!-- Tua Pek Kong (Qian) -->
 				<div class="col-12 col-sm-12 col-md-6 col-lg-4">
 
-
-					<div class="lucky_col">
-						<div class="wanzititle_col">
-							<a href="/lucky-book/tuapekkongqian">
-								<img class="wanzititle" src="/image/TuaPekKongQianZi.webp" />
-								<img width="65%" src="/image/TuaPekKongQian.svg" />
-							</a>
-						</div>
-						<div class="text">
-							<a href="/lucky-book/tuapekkongqian" class="text">
-								{{ $t('LuckyBook.Tua Pek Kong (Qian) Dictionary') }}</a>
-						</div>
-						<div class="text2">
-							<a href="/lucky-book/tuapekkongqian" class="text2">(QZT)</a>
-						</div>
-
-					</div>
-					<br />
 					<div class="btn_col">
 						<button class="btn_bg">
 							<a href="/lucky-book/tuapekkongqian">
@@ -236,16 +181,11 @@
 							</a>
 						</button>
 					</div>
-					<br />
 
 				</div>
 			</div>
 
-
 		</div>
-
-
-
 
 		<!--go up botton-->
 		<div class="go_up_btn">
@@ -566,23 +506,6 @@ export default {
 	text-align: -webkit-center;
 }
 
-.lucky_col {
-	background-color: #6EC1E4;
-	text-align: center;
-	padding-top: 10px;
-	width: 95%;
-	border-radius: 10px;
-
-}
-
-.wanzititle_col {
-	position: relative;
-}
-
-.wanzititle {
-	width: 65%;
-	position: absolute;
-}
 
 .lucky {
 	text-align: -webkit-center;
@@ -622,33 +545,11 @@ export default {
 	width: 100px;
 }
 
-.img {
-	text-align: -webkit-center;
-	place-content: center;
-	margin-inline: 0px;
-}
-
-@media screen and (min-width:1200px) {
-	.img {
-		margin-inline: 200px !important;
-	}
-}
-
 .search-ul {
 	padding: 0px;
 	gap: 1.0rem;
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);
-}
-
-.text {
-	text-align: center;
-	text-decoration: none;
-	color: white;
-	font-weight: bold;
-	font-size: 14px;
-	margin-top: 10px;
-	padding: 0 10px;
 }
 
 .nav-tabs {
@@ -689,15 +590,6 @@ export default {
 
 .nav-pills {
 	gap: 2.0rem;
-}
-
-.text2 {
-	text-align: center;
-	text-decoration: none;
-	color: white;
-	font-weight: bold;
-	font-size: 14px;
-	padding-bottom: 10px;
 }
 
 p {
