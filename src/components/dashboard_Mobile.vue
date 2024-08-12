@@ -22,7 +22,6 @@
 					<swiper-slide v-for="(drawObj, index) in data" :key="index" :id="`totoType${index}`">
 						<div class="card">
 							<div class="top-card-container" :style="{ background: cardTheme[index].bgColor }">
-
 								<div class="mobile-refresh-page-button-container">
 									<div class="refresh-icon">
 										<div
@@ -261,7 +260,6 @@ export default {
 	mounted() {
 		this.fetchData();
 		this.updateTimeText();
-		this.restoreScrollPosition();
 	},
 	beforeDestroy() {
 		clearInterval(this.intervalId);
@@ -368,36 +366,16 @@ export default {
 		refreshPage() {
 			this.fetchData()
 		},
-		restoreScrollPosition() {
-			// Get the saved card ID from localStorage
-			const cardId = localStorage.getItem('cardId');
-
-			if (cardId) {
-				this.$nextTick(() => {
-					const checkElement = () => {
-						const element = document.getElementById(cardId);
-						if (element) {
-							element.scrollIntoView();
-							// Clear the card ID from localStorage
-							localStorage.removeItem('cardId');
-						} else {
-							setTimeout(checkElement, 100); // Retry after 100ms
-						}
-					};
-					setTimeout(checkElement, 100); // Initial delay to ensure full rendering
-				});
-			}
+		onSwiperInit(swiper) {
+			this.swiper = swiper;
+		},
+		onSlideChange(swiper) {
+			this.activeIndex = swiper.activeIndex;
 		},
 		handleImageClick(index) {
 			this.activeIndex = index;
 			// Scroll to the section
 			this.scrollToDrawSection(index);
-		},
-		onSlideChange(swiper) {
-			this.activeIndex = swiper.activeIndex;
-		},
-		onSwiperInit(swiper) {
-			this.swiper = swiper;
 		},
 		scrollToDrawSection(index) {
 			if (this.swiper) {
@@ -485,7 +463,7 @@ export default {
 
 @media screen and (max-width: 769px) {
 	.scroll-container {
-		/* height: 100vh; */
+		height: 100vh;
 		overflow: auto;
 		position: relative;
 	}
@@ -504,7 +482,7 @@ export default {
 .navbar {
 	display: none;
 	position: sticky;
-	z-index: 2;
+	z-index: 3;
 	top: -1px;
 	justify-content: space-around;
 	align-items: center;

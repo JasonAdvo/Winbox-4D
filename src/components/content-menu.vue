@@ -128,6 +128,8 @@ export default {
 	z-index: 9999;
 	border-top-right-radius: 50px;
 	border-bottom-right-radius: 50px;
+	height: 100vh;
+	text-align: left;
 }
 
 .nav-item h5 {

@@ -38,9 +38,10 @@ body {
 	margin: 0;
 }
 
+/* 
 body {
 	overflow: auto !important;
-}
+} */
 
 body::-webkit-scrollbar {
 	display: none;

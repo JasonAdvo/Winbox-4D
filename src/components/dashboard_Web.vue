@@ -30,28 +30,6 @@
 				<div v-for="(drawObj, index) in data" :key="index" :id="`totoType${index}`"
 					class="draw-section white-bg" style="min-height:500px">
 					<div class="top-card-container" :style="{ backgroundColor: getBgColor(index) }">
-						<div class="mobile-menu-page-button-container"
-							style="color: white; position: absolute; left: 0;">
-							<div class="menu-icon">
-								<button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
-									data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar"
-									aria-label="Toggle navigation">
-									<span class="navbar-toggler-icon"></span>
-								</button>
-							</div>
-						</div>
-
-						<div class="mobile-refresh-page-button-container"
-							style="color: white; position: absolute; right: 0;">
-							<div class="refresh-icon">
-								<div style="position: absolute; top: -3px; right: 5px; transform: rotateZ(75deg);">
-									<a class="refresh-arrow" @click="refreshPage(index)">
-										&#8635;
-									</a>
-								</div>
-							</div>
-						</div>
-
 						<div class="draw-header">
 							<div class="logo-title-container">
 								<div class="logo-white-container">
@@ -284,7 +262,6 @@ export default {
 	mounted() {
 		this.fetchData();
 		this.updateTimeText();
-		this.restoreScrollPosition();
 		// 监听滚动事件
 		this.$refs.dashboard.addEventListener('scroll', this.handleScroll);;
 		this.intervalId = setInterval(this.checkTime, 1000);
@@ -356,9 +333,6 @@ export default {
 				this.currentTimeText = "7:30pm";
 			}
 		},
-		formatDate(dateStr) {
-			return dateStr;
-		},
 		getBgColor(type) {
 			return this.cardTheme[type].bgColor;
 		},
@@ -427,26 +401,6 @@ export default {
 			localStorage.setItem('cardId', cardId);
 			// Reload the page
 			window.location.reload();
-		},
-		restoreScrollPosition() {
-			// Get the saved card ID from localStorage
-			const cardId = localStorage.getItem('cardId');
-
-			if (cardId) {
-				this.$nextTick(() => {
-					const checkElement = () => {
-						const element = document.getElementById(cardId);
-						if (element) {
-							element.scrollIntoView({ behavior: 'smooth' });
-							// Clear the card ID from localStorage
-							localStorage.removeItem('cardId');
-						} else {
-							setTimeout(checkElement, 100); // Retry after 100ms
-						}
-					};
-					setTimeout(checkElement, 100); // Initial delay to ensure full rendering
-				});
-			}
 		},
 		handleImageClick(index) {
 			this.activeIndex = index;
