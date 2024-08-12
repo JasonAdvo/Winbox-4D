@@ -4,9 +4,9 @@
 		<div class="dashboard">
 			<!--Topbar 2-->
 			<div class="navbar">
-				<div v-for="image in images" :key="image.key" :id="`image-container-${image.key}`"
-					:class="['image-container', `image-container-${image.key}`, { active: activeIndex === image.key }]"
-					@click="handleImageClick(image.key)">
+				<div v-for="(image, imageIndex) in images" :key="image.key" :id="`image-container-${image.key}`"
+					:class="['image-container', `image-container-${image.key}`, { active: activeIndex === imageIndex }]"
+					@click="handleImageClick(imageIndex)">
 					<img :src="image.src" class="round-image" />
 				</div>
 			</div>
@@ -16,7 +16,8 @@
 			</div>
 
 			<div class="draw-results">
-				<swiper ref="mySwiper" :slides-per-view="1" :space-between="10" :allowTouchMove="false"
+				<swiper class="swiper-container" @init="onSwiperInit" ref="mySwiper" :slides-per-view="1"
+					:space-between="0" :allowTouchMove="true" :pagination="paginationConfig"
 					@slideChange="onSlideChange">
 					<swiper-slide v-for="(drawObj, index) in data" :key="index" :id="`totoType${index}`">
 						<div class="card">
@@ -177,6 +178,9 @@ export default {
 				{ title: 'Card 10', content: 'Content for card 10' }
 			],
 			scrollPosition: 0,
+			paginationConfig: {
+				clickable: true
+			},
 			cardTheme: {
 				M: {
 					name: "Magnum 4D", bgColor: "black",
@@ -239,7 +243,7 @@ export default {
 					sectionTitleTextColor: "white"
 				}
 			},
-			activeIndex: 'M',
+			activeIndex: 0,
 			images: [
 				{ key: 'M', src: '/image/Magnum@3x.png' },
 				{ key: 'D', src: '/image/damacai@3x.png' },
@@ -261,13 +265,11 @@ export default {
 	},
 	beforeDestroy() {
 		clearInterval(this.intervalId);
-
 	},
 	methods: {
 		async fetchData() {
 			// Capture the start time
 			const startTime = Date.now();
-
 			try {
 				const response = await axios.get('https://result2.song6.club/result');
 				// Extract only desired keys from response.data
@@ -279,7 +281,6 @@ export default {
 						extractedData[key] = response.data[key];
 					}
 				});
-
 				// Delay returning the data by 0.5 seconds
 				setTimeout(() => {
 					this.data = extractedData;
@@ -321,35 +322,14 @@ export default {
 				this.currentTimeText = "7:30pm";
 			}
 		},
-		isActive(route) {
-			if (route === '/') {
-				return this.$route.path === route;
-			}
-			return this.$route.path.startsWith(route);
-		},
 		changeLanguage(lang) {
 			this.$i18n.locale = lang;
-		},
-		formatDate(dateStr) {
-			return dateStr;
-		},
-		getName(type) {
-			return this.cardTheme[type].name;
-		},
-		getLogo(type) {
-			return this.cardTheme[type].logoPath;
-		},
-		getBgColor(type) {
-			return this.cardTheme[type].bgColor;
 		},
 		getPrizeStyle(type) {
 			return {
 				backgroundColor: this.cardTheme[type].prizeSectionColor,
 				color: this.cardTheme[type].prizeSectionTextColor
 			};
-		},
-		getSectionTitleTextColor(type) {
-			return this.cardTheme[type].sectionTitleTextColor;
 		},
 		getSmallSectionStyle(type) {
 			return {
@@ -358,8 +338,6 @@ export default {
 			};
 		},
 		getDisplayResult(number) {
-			const cutoffTime = new Date();
-			cutoffTime.setHours(15, 30, 0, 0);
 			return number;
 		},
 		getSpecialNumbers(draw) {
@@ -387,14 +365,8 @@ export default {
 			// Extract consolation numbers from the draw object
 			return [draw.C1, draw.C2, draw.C3, draw.C4, draw.C5, draw.C6, draw.C7, draw.C8, draw.C9, draw.C10];
 		},
-		refreshPage(index) {
+		refreshPage() {
 			this.fetchData()
-			// Save the ID of the clicked refresh button to localStorage
-			// const cardId = `totoType${index}`;
-
-			// localStorage.setItem('cardId', cardId);
-			// Reload the page
-			// window.location.reload();
 		},
 		restoreScrollPosition() {
 			// Get the saved card ID from localStorage
@@ -418,23 +390,20 @@ export default {
 		},
 		handleImageClick(index) {
 			this.activeIndex = index;
+			// Scroll to the section
 			this.scrollToDrawSection(index);
 		},
-		onSlideChange() {
-			// Get the active index from the swiper instance
-			this.activeIndex = this.$refs.mySwiper.swiper.realIndex;
+		onSlideChange(swiper) {
+			this.activeIndex = swiper.activeIndex;
 		},
-		handleLogoClick(id) {
-			this.activeIndex = id;
-			this.scrollToDrawSection(id);
+		onSwiperInit(swiper) {
+			this.swiper = swiper;
 		},
 		scrollToDrawSection(index) {
-			const element = document.getElementById(`totoType${index}`);
-			if (element) {
-				element.scrollIntoView();
+			if (this.swiper) {
+				this.swiper.slideTo(index);
 			}
-		},
-
+		}
 	},
 };
 </script>
