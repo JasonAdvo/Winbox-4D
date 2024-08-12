@@ -2,10 +2,10 @@
 	<div class="left-sidebar">
 		<div class="container-fluid">
 			<!--leftside-->
-			<div class="sidebar" style="background-color: #6EC1E4;">
+			<div class="sidebar" style="background-color: #007BD2;">
 				<div style="background: white; height: 100%; border-top-right-radius: 50px;">
 					<div class="logo_col">
-						<img class="d_num_logo" src="/image/Winbox_logo.webp">
+						<img class="d_num_logo" src="/image/Winbox_4D_Logo.webp">
 					</div>
 					<div class="sidebar-main">
 						<p class="results_install_app_text">{{ $t('Sidebar.Result') }}</p>

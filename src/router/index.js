@@ -2,7 +2,6 @@ import { createRouter, createWebHistory } from 'vue-router';
 
 const Dashboard = () => import('../views/dashboard.vue');
 const SpinMyLuck = () => import('../views/SpinMyLuck.vue');
-// const LuckyBook = () => import('../views/LuckyBook.vue');
 const LuckyBook = () => import('../views/LuckyBook.vue');
 const TuaPekKongWan = () => import('../views/TuaPekKong.vue');
 const GuanYin = () => import('../views/GuanYin.vue');

@@ -16,7 +16,8 @@
 			</div>
 
 			<div class="draw-results">
-				<swiper ref="mySwiper" :slides-per-view="1" :space-between="10" :allowTouchMove="true"
+				<swiper class="swiper-container" @init="onSwiperInit" ref="mySwiper" :slides-per-view="1"
+					:space-between="0" :allowTouchMove="true" :pagination="paginationConfig"
 					@slideChange="onSlideChange">
 					<swiper-slide v-for="(drawObj, index) in data" :key="index" :id="`totoType${index}`">
 						<div class="card">
@@ -177,6 +178,9 @@ export default {
 				{ title: 'Card 10', content: 'Content for card 10' }
 			],
 			scrollPosition: 0,
+			paginationConfig: {
+				clickable: true
+			},
 			cardTheme: {
 				M: {
 					name: "Magnum 4D", bgColor: "black",
@@ -258,15 +262,6 @@ export default {
 		this.fetchData();
 		this.updateTimeText();
 		this.restoreScrollPosition();
-		this.$nextTick(() => {
-			const swiperInstance = this.$refs.mySwiper.swiper;
-			if (swiperInstance) {
-				console.log('Swiper instance:', swiperInstance);
-				swiperInstance.slideTo(this.activeIndex); // Example to check functionality
-			} else {
-				console.log('Swiper instance not found');
-			}
-		});
 	},
 	beforeDestroy() {
 		clearInterval(this.intervalId);
@@ -394,33 +389,21 @@ export default {
 			}
 		},
 		handleImageClick(index) {
-			const sections = ['M', 'D', 'T', 'S', 'ST', 'SB', 'SW', 'G', 'H', 'P'];
-			const section = sections[index];  // Map index to the corresponding section
 			this.activeIndex = index;
-
 			// Scroll to the section
-			this.scrollToDrawSection(section);
-
-			// Use nextTick to ensure Swiper is ready
-			this.$nextTick(() => {
-				if (this.$refs.mySwiper && this.$refs.mySwiper.swiper) {
-					this.$refs.mySwiper.swiper.slideTo(index);
-				} else {
-					console.log('Swiper instance not found');
-				}
-			});
+			this.scrollToDrawSection(index);
 		},
 		onSlideChange(swiper) {
 			this.activeIndex = swiper.activeIndex;
-			console.log(swiper, "YeBi");
-			console.log(swiper.activeIndex);
+		},
+		onSwiperInit(swiper) {
+			this.swiper = swiper;
 		},
 		scrollToDrawSection(index) {
-			const element = document.getElementById(`totoType${index}`);
-			if (element) {
-				element.scrollIntoView();
+			if (this.swiper) {
+				this.swiper.slideTo(index);
 			}
-		},
+		}
 	},
 };
 </script>
