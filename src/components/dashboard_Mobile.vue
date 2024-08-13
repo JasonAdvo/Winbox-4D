@@ -1,25 +1,24 @@
 <template>
-
 	<div class="scroll-container">
 		<div class="dashboard">
-			<!--Topbar 2-->
-			<div class="navbar">
-				<div v-for="(image, imageIndex) in images" :key="image.key" :id="`image-container-${image.key}`"
-					:class="['image-container', `image-container-${image.key}`, { active: activeIndex === imageIndex }]"
-					@click="handleImageClick(imageIndex)">
-					<img :src="image.src" class="round-image" />
-				</div>
-			</div>
-
-			<div>
-				<ContentMenu />
-			</div>
-
 			<div class="draw-results">
+				<div class="navbar">
+					<div v-for="(image, imageIndex) in images" :key="image.key" :id="`image-container-${image.key}`"
+						:class="['image-container', `image-container-${image.key}`, { active: activeIndex === imageIndex }]"
+						@click="handleImageClick(imageIndex)">
+						<img :src="image.src" class="round-image" />
+					</div>
+				</div>
 				<swiper class="swiper-container" @init="onSwiperInit" ref="mySwiper" :slides-per-view="1"
 					:space-between="0" :allowTouchMove="true" :pagination="paginationConfig"
 					@slideChange="onSlideChange">
 					<swiper-slide v-for="(drawObj, index) in data" :key="index" :id="`totoType${index}`">
+
+						<button class="content_btn" type="button" data-bs-toggle="offcanvas"
+							data-bs-target="#offcanvasNavbar2" aria-controls="offcanvasNavbar">
+							<span class="navbar-toggler-icon">&#9776</span>
+						</button>
+
 						<div class="card">
 							<div class="top-card-container" :style="{ background: cardTheme[index].bgColor }">
 								<div class="mobile-refresh-page-button-container">
@@ -64,6 +63,7 @@
 									</div>
 								</div>
 							</div>
+
 							<div class="result-display-section">
 								<div class="prize-section">
 									<div class="prize"
@@ -122,13 +122,11 @@
 											<div class="number-inner">
 												{{ getDisplayResult(drawObj.JP1) }}
 											</div>
-
 										</div>
 										<div class="amount">
 											<div class="number-inner">
 												{{ getDisplayResult(drawObj.JP2) }}
 											</div>
-
 										</div>
 									</div>
 								</div>
@@ -137,8 +135,61 @@
 					</swiper-slide>
 				</swiper>
 			</div>
+			<!-- Offcanvas Sidebar -->
+			<div class="offcanvas offcanvas-start offcanvas-custom-width border-top-bottom-right-80px width-sidebar"
+				tabindex="-1" id="offcanvasNavbar2" aria-labelledby="offcanvasNavbarLabel">
+				<div class="offcanvas-header">
+					<button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+				</div>
+				<div class="offcanvas-body">
+					<ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+						<li class="nav-item">
+							<h5 class="nav-link">{{ $t('Sidebar.Result') }}</h5>
+						</li>
+						<li class="nav-item">
+							<router-link class="nav-link" to="/" :class="{ Active: isActive('/') }">
+								<img :src="getImageSrc('/', '/image/dashboard.webp', '/image/dashboard_Active.svg')"
+									style="width: 25px; margin-right: 13px;" />
+								{{ $t('Sidebar.Dashboard') }}
+							</router-link>
+						</li>
+						<li style="margin-top: 20px;" class="nav-item">
+							<h5 class="nav-link">{{ $t('Sidebar.ToolBox') }}</h5>
+						</li>
+						<li class="nav-item">
+							<router-link class="nav-link" to="/spin-my-luck"
+								:class="{ Active: isActive('/spin-my-luck') }">
+								<img :src="getImageSrc('/spin-my-luck', '/image/spin.webp', '/image/spin_Active.svg')"
+									style="width: 25px; margin-right: 13px;" />
+								{{ $t('Sidebar.Spin My Luck') }}
+							</router-link>
+						</li>
+						<li class="nav-item">
+							<router-link class="nav-link" to="/lucky-book" :class="{ Active: isActive('/lucky-book') }">
+								<img :src="getImageSrc('/lucky-book', '/image/book.svg', '/image/book_Active.svg')"
+									style="width: 25px; margin-right: 13px;" />
+								{{ $t('Sidebar.Lucky Book') }}
+							</router-link>
+						</li>
+						<li style="margin-top: 20px;" class="nav-item">
+							<h5 class="nav-link">{{ $t('Sidebar.Setting') }}</h5>
+						</li>
+						<li class="nav-item">
+							<img src="/image/Earth_icon.svg" style="width: 25px; margin-right: 13px;" />
+							<button style="padding: 0;" class="btn dropdown-toggle" type="button"
+								id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+								{{ $t('Sidebar.Language') }}
+							</button>
+							<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+								<li><a class="dropdown-item" @click="changeLanguage('en')">English</a></li>
+								<li><a class="dropdown-item" @click="changeLanguage('zh')">中文</a></li>
+								<li><a class="dropdown-item" @click="changeLanguage('ms')">Malay</a></li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+			</div>
 		</div>
-
 	</div>
 </template>
 <script>
@@ -149,6 +200,7 @@ import { Swiper, SwiperSlide } from 'swiper/vue';
 import 'swiper/swiper-bundle.css'; // Import Swiper styles
 import axios from 'axios';
 import TopBar from '/src/components/topbar.vue';
+import ContentMenuD from '@/components/content-menu-D.vue'
 import ContentMenu from '@/components/content-menu.vue'
 // import { BCarousel, BCarouselSlide } from 'bootstrap-vue';
 
@@ -156,6 +208,7 @@ export default {
 	components: {
 		TopBar,
 		ContentMenu,
+		ContentMenuD,
 		Swiper,
 		SwiperSlide
 	},
@@ -260,6 +313,22 @@ export default {
 	mounted() {
 		this.fetchData();
 		this.updateTimeText();
+		const offcanvas = document.getElementById('offcanvasNavbar2');
+
+		offcanvas.addEventListener('show.bs.offcanvas', () => {
+			console.log('HIHI')
+			document.body.style.overflow = 'hidden'; // Disable body scroll when sidebar opens
+		});
+
+		offcanvas.addEventListener('hidden.bs.offcanvas', () => {
+			console.log('Bye')
+			document.body.style.overflow = 'auto'; // Enable body scroll when sidebar closes
+		});
+
+		this.$router.beforeEach((to, from, next) => {
+			document.body.style.overflow = 'auto'; // Reset overflow to auto on route change
+			next();
+		});
 	},
 	beforeDestroy() {
 		clearInterval(this.intervalId);
@@ -381,7 +450,19 @@ export default {
 			if (this.swiper) {
 				this.swiper.slideTo(index);
 			}
-		}
+		},
+		isActive(route) {
+			if (route === '/') {
+				return this.$route.path === route || this.$route.path === '/';
+			}
+			return this.$route.path.startsWith(route);
+		},
+		changeLanguage(lang) {
+			this.$i18n.locale = lang;
+		},
+		getImageSrc(route, defaultImage, activeImage) {
+			return this.isActive(route) ? activeImage : defaultImage;
+		},
 	},
 };
 </script>
@@ -481,19 +562,18 @@ export default {
 
 .navbar {
 	display: none;
-	position: sticky;
-	z-index: 3;
+	position: fixed;
 	top: -1px;
+	left: 0;
+	z-index: 2;
 	justify-content: space-around;
 	align-items: center;
 	background-color: white;
 	border-bottom-left-radius: 15px;
 	border-bottom-right-radius: 15px;
-	width: 100%;
-	left: 0;
 	box-shadow: 0 3px 5px #0000001a;
+	width: 100%;
 	height: 61px;
-	margin-bottom: -60px;
 }
 
 .image-container {
@@ -614,7 +694,7 @@ export default {
 	display: flex;
 	justify-content: center;
 	background-color: white;
-	z-index: 997;
+	/* z-index: 997; */
 	margin-top: 2px;
 	margin-inline: 20px;
 	border-radius: 17px;
@@ -793,14 +873,14 @@ export default {
 *,
 ::after,
 ::before {
-	z-index: unset;
+	/* z-index: unset; */
 }
 
 .content_btn {
 	position: absolute;
 	top: 71px;
 	left: 20px;
-	z-index: 2;
+	/* z-index: 2; */
 	background-color: white !important;
 	border: 0 !important;
 	color: #000 !important;
@@ -826,7 +906,7 @@ export default {
 }
 
 .offcanvas.offcanvas-start.border-top-bottom-right-80px.width-sidebar {
-	z-index: 9999;
+	/* z-index: 9999; */
 	border-top-right-radius: 50px;
 	border-bottom-right-radius: 50px;
 }
@@ -837,6 +917,62 @@ export default {
 
 .active {
 	color: #6EC1E4 !important;
+	font-weight: 700;
+}
+
+*,
+::after,
+::before {
+	z-index: unset;
+}
+
+.content_btn {
+	position: absolute;
+	top: 71px;
+	left: 20px;
+	z-index: 2;
+	background-color: white !important;
+	border: 0 !important;
+	color: #000 !important;
+	opacity: 0.8;
+	border-radius: 50%;
+	width: 30px;
+	height: 30px;
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	justify-content: center;
+	font-size: 15px;
+	font-weight: 700;
+}
+
+.btn-close {
+	margin: 50px 32px 0px 24px;
+	position: absolute;
+	right: 0;
+}
+
+
+.offcanvas-custom-width {
+	--bs-offcanvas-width: 320px;
+	/* Set your desired width here */
+}
+
+.offcanvas.offcanvas-start.border-top-bottom-right-80px.width-sidebar {
+	z-index: 9999;
+	border-top-right-radius: 50px;
+	border-bottom-right-radius: 50px;
+	height: 100vh;
+	text-align: left;
+}
+
+.nav-item h5 {
+	font-weight: 700;
+}
+
+.Active {
+	color: #007BD2 !important;
+	background-color: rgb(0, 123, 210, 0.2) !important;
 	font-weight: 700;
 }
 </style>

@@ -1,13 +1,13 @@
 <template>
 	<!-- Hamburger Button -->
-	<button class="content_btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar2"
+	<button class="content_btn" type="button" :data-bs-target="`#${menuId}`" data-bs-toggle="offcanvas"
 		aria-controls="offcanvasNavbar">
 		<span class="navbar-toggler-icon">&#9776</span>
 	</button>
 
 	<!-- Offcanvas Sidebar -->
 	<div class="offcanvas offcanvas-start offcanvas-custom-width border-top-bottom-right-80px width-sidebar"
-		tabindex="-1" id="offcanvasNavbar2" aria-labelledby="offcanvasNavbarLabel">
+		tabindex="-1" :id="menuId" aria-labelledby="offcanvasNavbarLabel">
 		<div class="offcanvas-header">
 			<button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
 		</div>
@@ -17,7 +17,7 @@
 				<li class="nav-item">
 					<h5 class="nav-link">{{ $t('Sidebar.Result') }}</h5>
 				</li>
-				<li class="nav-item" :class="{ active: isActive('/') }">
+				<li class="nav-item">
 					<router-link class="nav-link" to="/" :class="{ active: isActive('/') }">
 						<img :src="getImageSrc('/', '/image/dashboard.webp', '/image/dashboard_Active.svg')"
 							style="width: 25px; margin-right: 13px;" />
@@ -63,10 +63,10 @@
 
 <script>
 export default {
-	name: 'Content-Menu',
-	data() {
-		return {
-
+	props: {
+		menuId: {
+			type: String,
+			required: true
 		}
 	},
 	methods: {
@@ -82,25 +82,7 @@ export default {
 		getImageSrc(route, defaultImage, activeImage) {
 			return this.isActive(route) ? activeImage : defaultImage;
 		},
-	},
-	mounted() {
-		const offcanvas = document.getElementById('offcanvasNavbar2');
-
-		offcanvas.addEventListener('show.bs.offcanvas', () => {
-			console.log('HIHI')
-			document.body.style.overflow = 'hidden'; // Disable body scroll when sidebar opens
-		});
-
-		offcanvas.addEventListener('hidden.bs.offcanvas', () => {
-			console.log('Bye')
-			document.body.style.overflow = 'auto'; // Enable body scroll when sidebar closes
-		});
-
-		this.$router.beforeEach((to, from, next) => {
-			document.body.style.overflow = 'auto'; // Reset overflow to auto on route change
-			next();
-		});
-	},
+	}
 }
 </script>
 
@@ -108,7 +90,7 @@ export default {
 *,
 ::after,
 ::before {
-	z-index: unset;
+	z-index: 1;
 }
 
 .content_btn {
@@ -137,18 +119,24 @@ export default {
 	right: 0;
 }
 
-
 .offcanvas-custom-width {
 	--bs-offcanvas-width: 320px;
-	/* Set your desired width here */
 }
 
 .offcanvas.offcanvas-start.border-top-bottom-right-80px.width-sidebar {
-	z-index: 9999;
+	z-index: 1100;
+	/* Ensure it's above the navbar */
 	border-top-right-radius: 50px;
 	border-bottom-right-radius: 50px;
 	height: 100vh;
 	text-align: left;
+	position: fixed;
+	/* Fix it to the viewport */
+	top: 0;
+	left: 0;
+	width: var(--bs-offcanvas-width, 320px);
+	background-color: white;
+	/* Ensure it has a background */
 }
 
 .nav-item h5 {
@@ -157,7 +145,16 @@ export default {
 
 .active {
 	color: #007BD2 !important;
-	background-color: rgb(0, 123, 210, 0.2) !important;
 	font-weight: 700;
+}
+
+.offcanvas.offcanvas-start {
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: var(--bs-offcanvas-width, 320px);
+	z-index: 1050;
+	transition: transform 0.3s ease-in-out;
 }
 </style>
