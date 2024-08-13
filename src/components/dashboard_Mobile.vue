@@ -870,12 +870,6 @@ export default {
 	margin: 3px;
 }
 
-*,
-::after,
-::before {
-	/* z-index: unset; */
-}
-
 .content_btn {
 	position: absolute;
 	top: 71px;
