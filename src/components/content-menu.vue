@@ -87,12 +87,12 @@ export default {
 		const offcanvas = document.getElementById('offcanvasNavbar2');
 
 		offcanvas.addEventListener('show.bs.offcanvas', () => {
-			console.log('HIHI')
+			('HIHI')
 			document.body.style.overflow = 'hidden'; // Disable body scroll when sidebar opens
 		});
 
 		offcanvas.addEventListener('hidden.bs.offcanvas', () => {
-			console.log('Bye')
+			('Bye')
 			document.body.style.overflow = 'auto'; // Enable body scroll when sidebar closes
 		});
 
