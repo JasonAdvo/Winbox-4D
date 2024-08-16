@@ -74,12 +74,13 @@
 											<span style="font-weight: 700;">{{ prize }}</span> {{ $t('Dashboard.prize')
 											}}
 										</h2>
-										<div class="prize-number">{{
-											getDisplayResult(drawObj['P' + (I + 1)]) }}
+										<div class="prize-number">
+											<div ref="dataContainer">
+												{{ getDisplayResult(drawObj['P' + (I + 1)]) }}
+											</div>
 										</div>
 									</div>
 								</div>
-
 
 								<div class="special special-section-min-height">
 									<h2 class="title-font-size small-title-top-bottom-padding b-r-10px"
@@ -89,7 +90,9 @@
 									<div class="special-numbers">
 										<div v-for="(number, I) in getSpecialNumbers(drawObj)" :key="I" class="number">
 											<div class="number-inner">
-												{{ getDisplayResult(number) }}
+												<div ref="dataContainer">
+													{{ getDisplayResult(number) }}
+												</div>
 											</div>
 										</div>
 									</div>
@@ -102,7 +105,9 @@
 										<div v-for="(number, I) in getConsolationNumbers(drawObj)" :key="I"
 											class="number">
 											<div class="number-inner">
-												{{ getDisplayResult(number) }}
+												<div ref="dataContainer">
+													{{ getDisplayResult(number) }}
+												</div>
 											</div>
 										</div>
 									</div>
@@ -120,12 +125,16 @@
 									<div class="jackpot-prize">
 										<div class="amount">
 											<div class="number-inner">
-												{{ getDisplayResult(drawObj.JP1) }}
+												<div ref="dataContainer">
+													{{ getDisplayResult(drawObj.JP1) }}
+												</div>
 											</div>
 										</div>
 										<div class="amount">
 											<div class="number-inner">
-												{{ getDisplayResult(drawObj.JP2) }}
+												<div ref="dataContainer">
+													{{ getDisplayResult(drawObj.JP2) }}
+												</div>
 											</div>
 										</div>
 									</div>
@@ -433,7 +442,34 @@ export default {
 			return [draw.C1, draw.C2, draw.C3, draw.C4, draw.C5, draw.C6, draw.C7, draw.C8, draw.C9, draw.C10];
 		},
 		refreshPage() {
-			this.fetchData()
+			this.fetchData();
+			this.$nextTick(() => {
+				this.triggerBlinkAnimation();
+			});
+		},
+		triggerBlinkAnimation() {
+			const dataContainer = this.$refs.dataContainer;
+			const blinkDuration = 1000; // Duration in milliseconds (1 second)
+
+			if (dataContainer && dataContainer.length) {
+				// Iterate over each element in the dataContainer array
+				dataContainer.forEach(element => {
+					element.classList.add('blink');
+					// Remove the blink class after the animation completes
+					setTimeout(() => {
+						element.classList.remove('blink');
+					}, blinkDuration);
+				});
+			} else if (dataContainer) {
+				// In case it's a single element, not a collection
+				dataContainer.classList.add('blink');
+				// Remove the blink class after the animation completes
+				setTimeout(() => {
+					dataContainer.classList.remove('blink');
+				}, blinkDuration);
+			} else {
+				console.error("dataContainer ref is undefined.");
+			}
 		},
 		onSwiperInit(swiper) {
 			this.swiper = swiper;
@@ -968,5 +1004,22 @@ export default {
 	color: #007BD2 !important;
 	background-color: rgb(0, 123, 210, 0.2) !important;
 	font-weight: 700;
+}
+
+.blink {
+	animation: blink-animation 0.2s;
+	/* Reduced duration for faster blink */
+}
+
+@keyframes blink-animation {
+
+	0%,
+	100% {
+		opacity: 1;
+	}
+
+	50% {
+		opacity: 0;
+	}
 }
 </style>
