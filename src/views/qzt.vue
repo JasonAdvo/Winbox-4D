@@ -14,7 +14,7 @@
 				<div class="col-12 title_col">
 					<div class="title">
 						<div class="dictionary">
-							<p>{{ $t('Tua Pek Kong (Qian) Dictionary') }}</p>
+							<p>{{ $t('LuckyBook.Tua Pek Kong (Qian) Dictionary') }}</p>
 						</div>
 
 						<!--search-->
@@ -205,9 +205,9 @@ export default {
 				const data = await response.json();
 				this.items = data;
 				await this.delayedLoading();
-				this.$nextTick(() => {
-					this.tooltip();
-				});
+				// this.$nextTick(() => {
+				// 	this.tooltip();
+				// });
 			} catch (error) {
 				console.error('Error fetching items:', error);
 			} finally {
