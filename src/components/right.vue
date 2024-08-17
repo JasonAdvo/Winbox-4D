@@ -96,7 +96,7 @@ export default {
 	background-color: white;
 	border-top-left-radius: 50px;
 	border-bottom-left-radius: 50px;
-	padding-top: 10px;
+	padding: 10px 0;
 }
 
 .right_col2 {

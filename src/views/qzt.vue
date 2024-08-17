@@ -27,9 +27,9 @@
 								<div class="dropdown" @click="toggleDropdown">
 									<div class="dropdown-selected">{{ $t('LuckyBook.ALL') }}</div>
 									<ul v-show="isDropdownOpen" class="dropdown-list">
-										<li @click="selectRange('all')">{{ $t('LuckyBook.ALL') }}</li>
+										<li @click.stop="selectRange('all')">{{ $t('LuckyBook.ALL') }}</li>
 										<li v-for="range in ranges" :key="range.value"
-											@click="selectRange(range.value)">
+											@click.stop="selectRange(range.value)">
 											{{ range.text }}
 										</li>
 									</ul>
@@ -37,6 +37,9 @@
 							</div>
 						</div>
 
+						<div class="no-result-container" v-if="paginatedItems.length === 0">
+							{{ $t('LuckyBook.No_Result') }}
+						</div>
 
 						<div class="tuapekkong_col pekkong">
 							<div v-for="(item) in paginatedItems" :key="item.number" class="item-container">
@@ -455,7 +458,7 @@ p {
 /* Custom Dropdown Styles */
 .dropdown-container {
 	position: relative;
-	width: 200px;
+	width: 220px;
 }
 
 .dropdown {
@@ -489,6 +492,18 @@ p {
 	margin: 0;
 	list-style: none;
 	white-space: nowrap;
+}
+
+.dropdown-list::-webkit-scrollbar {
+	display: none;
+	/* For WebKit browsers (Chrome, Safari) */
+}
+
+.dropdown-list {
+	-ms-overflow-style: none;
+	/* For Internet Explorer and Edge */
+	scrollbar-width: none;
+	/* For Firefox */
 }
 
 .dropdown-list li {
@@ -587,6 +602,23 @@ p {
 @media screen and (min-width: 769px) {
 	.Content-mobile-view {
 		display: none;
+	}
+}
+
+.no-result-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 20px;
+	font-weight: 400;
+	color: black;
+	padding: 20px;
+	height: 200px;
+}
+
+@media screen and (max-width: 1000px) {
+	.no-result-container {
+		font-size: 18px;
 	}
 }
 </style>
