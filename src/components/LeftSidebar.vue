@@ -4,9 +4,11 @@
 			<!--leftside-->
 			<div class="sidebar" style="background-color: #007BD2;">
 				<div style="background: white; height: 100%; border-top-right-radius: 50px;">
-					<div class="logo_col">
-						<img class="d_num_logo" src="/image/Winbox_4D_Logo.webp">
-					</div>
+					<router-link to="/">
+						<div class="logo_col">
+							<img class="d_num_logo" src="/image/Winbox_4D_Logo_v2.webp">
+						</div>
+					</router-link>
 					<div class="sidebar-main">
 						<p class="results_install_app_text">{{ $t('Sidebar.Result') }}</p>
 						<!-- Dashboard -->

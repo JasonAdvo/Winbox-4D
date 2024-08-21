@@ -14,6 +14,11 @@
 
 		<div class="offcanvas-body">
 			<ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+				<router-link to="/">
+					<div class="logo_col">
+						<img class="d_num_logo" src="/image/Winbox_4D_Logo_v2.webp">
+					</div>
+				</router-link>
 				<li class="nav-item">
 					<h5 class="nav-link">{{ $t('Sidebar.Result') }}</h5>
 				</li>
@@ -164,6 +169,16 @@ export default {
 .dashboard_icon {
 	background-color: #6EC1E4;
 	width: 30px;
+	height: auto;
+}
+
+.logo_col {
+	display: flex;
+	justify-content: center;
+}
+
+.d_num_logo {
+	width: 60px;
 	height: auto;
 }
 </style>
