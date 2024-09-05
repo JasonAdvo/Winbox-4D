@@ -153,6 +153,11 @@
 				</div>
 				<div class="offcanvas-body">
 					<ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+						<router-link to="/">
+							<div class="logo_col">
+								<img class="d_num_logo" src="/image/Winbox_4D_Logo_v2.webp">
+							</div>
+						</router-link>
 						<li class="nav-item">
 							<h5 class="nav-link">{{ $t('Sidebar.Result') }}</h5>
 						</li>
@@ -515,6 +520,16 @@ export default {
 	flex-direction: column;
 	border-radius: 0 0 50px 50px;
 	position: relative;
+}
+
+.logo_col {
+	display: flex;
+	justify-content: center;
+}
+
+.d_num_logo {
+	width: 60px;
+	height: auto;
 }
 
 .refresh-icon {
