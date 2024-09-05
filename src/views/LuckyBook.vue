@@ -440,9 +440,9 @@ export default {
 
 			if (this.showSearchResults) {
 				// Load data from JSON files
-				const wztData = await fetch('./src/assets/data/wzt.json').then(response => response.json());
-				const gztData = await fetch('./src/assets/data/gzt.json').then(response => response.json());
-				const qztData = await fetch('./src/assets/data/qzt.json').then(response => response.json());
+				const wztData = await fetch('/data/wzt.json').then(response => response.json());
+				const gztData = await fetch('/data/gzt.json').then(response => response.json());
+				const qztData = await fetch('/data/qzt.json').then(response => response.json());
 
 				this.allData = [...wztData, ...gztData, ...qztData];
 

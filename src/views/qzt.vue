@@ -201,7 +201,7 @@ export default {
 		async fetchItems() {
 			try {
 				this.isLoadingItems = true;
-				const response = await fetch('/src/assets/data/qzt.json'); // Adjust the path as needed
+				const response = await fetch('/data/qzt.json'); // Adjust the path as needed
 				if (!response.ok) {
 					throw new Error('Network response was not ok');
 				}
