@@ -11,6 +11,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 // Bootstrap JavaScript
 import 'bootstrap-icons/font/bootstrap-icons.css';
+import '/src/assets/main.css'
 
 const app = createApp(App);
 

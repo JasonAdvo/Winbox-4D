@@ -1,7 +1,15 @@
 @import './base.css';
 
-@media (hover: hover) {
-	a:hover {}
+
+
+/* Top Bar Light Theme */
+.LT_Theme_Button {
+	--background-color: #FFFFFF;
+	--border: 2px solid black;
 }
 
-@media (min-width: 1024px) {}
+/* Top Bar Dark Theme */
+.DT_Theme_Button {
+	--background-color: rgba(34, 34, 34, 255);
+	--border: 2px solid rgb(0, 123, 210);
+}

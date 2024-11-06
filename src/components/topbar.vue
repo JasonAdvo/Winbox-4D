@@ -1,6 +1,7 @@
 <template>
 	<div>
-		<div class="top-bar" style="background-color: #007BD2;">
+		<div class="top-bar"
+			:style="currentTheme === 'dark' ? 'background-color: rgba(34, 34, 34, 255)' : 'background-color: #007BD2'">
 			<div class="full-width plr-20">
 				<div class="top">
 					<div class="display-img" id="display-img">
@@ -19,30 +20,49 @@
 
 
 							<div class="offcanvas offcanvas-start border-top-bottom-right-80px width-sidebar"
-								tabindex="-1" id="offcanvasNavbar1" aria-labelledby="offcanvasNavbarLabel">
+								tabindex="-1" id="offcanvasNavbar1" aria-labelledby="offcanvasNavbarLabel"
+								:style="currentTheme === 'dark' ? 'background-color: rgb(58, 58, 58)' : 'background-color: rgb(255, 255, 255)'">
 								<div class="offcanvas-header">
 									<button type="button" class="btn-close" data-bs-dismiss="offcanvas"
-										aria-label="Close"></button>
+										aria-label="Close"
+										:style="currentTheme === 'dark' ? 'background-color: #007BD2' : 'background-color: white'"></button>
 								</div>
 
 								<div class="offcanvas-body">
 									<ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
 										<li class="nav-item">
-											<h5 class="nav-link">{{ $t('Sidebar.Result') }}</h5>
+											<h5 class="nav-link"
+												:style="currentTheme === 'dark' ? 'color: rgb(234, 234, 234)' : 'color: black'">
+												{{ $t('Sidebar.Result') }}</h5>
 										</li>
 										<li class="nav-item">
-											<router-link class="nav-link" to="/" :class="{ active: isActive('/') }">
+											<router-link class="nav-link" to="/" :class="{ active: isActive('/') }"
+												:style="isActive('/') ?
+													(currentTheme === 'dark'
+														? { backgroundColor: '#007BD2', color: 'white' }
+														: { backgroundColor: 'rgba(0, 123, 210, 0.2)', color: '#007BD2' })
+													: (currentTheme === 'dark'
+														? { color: 'white' }
+														: '')">
 												<img :src="getImageSrc('/', '/image/dashboard.webp', '/image/dashboard_Active.svg')"
 													style="width: 25px; margin-right: 13px;" />
 												{{ $t('Sidebar.Dashboard') }}
 											</router-link>
 										</li>
 										<li style="margin-top: 20px;" class="nav-item">
-											<h5 class="nav-link">{{ $t('Sidebar.ToolBox') }}</h5>
+											<h5 class="nav-link"
+												:style="currentTheme === 'dark' ? 'color: rgb(234, 234, 234)' : 'color: black'">
+												{{ $t('Sidebar.ToolBox') }}</h5>
 										</li>
 										<li class="nav-item">
 											<router-link class="nav-link" to="/spin-my-luck"
-												:class="{ active: isActive('/spin-my-luck') }">
+												:class="{ active: isActive('/spin-my-luck') }" :style="isActive('/spin-my-luck') ?
+													(currentTheme === 'dark'
+														? { backgroundColor: '#007BD2', color: 'white' }
+														: { backgroundColor: 'rgba(0, 123, 210, 0.2)', color: '#007BD2' })
+													: (currentTheme === 'dark'
+														? { color: 'white' }
+														: '')">
 												<img :src="getImageSrc('/spin-my-luck', '/image/spin.webp', '/image/spin_Active.svg')"
 													style="width: 25px; margin-right: 13px;" />
 												{{ $t('Sidebar.Spin My Luck') }}
@@ -50,19 +70,28 @@
 										</li>
 										<li class="nav-item">
 											<router-link class="nav-link" to="/lucky-book"
-												:class="{ active: isActive('/lucky-book') }">
+												:class="{ active: isActive('/lucky-book') }" :style="isActive('/lucky-book') ?
+													(currentTheme === 'dark'
+														? { backgroundColor: '#007BD2', color: 'white' }
+														: { backgroundColor: 'rgba(0, 123, 210, 0.2)', color: '#007BD2' })
+													: (currentTheme === 'dark'
+														? { color: 'white' }
+														: '')">
 												<img :src="getImageSrc('/lucky-book', '/image/book.svg', '/image/book_Active.svg')"
 													style="width: 25px; margin-right: 13px;" />
 												{{ $t('Sidebar.Lucky Book') }}
 											</router-link>
 										</li>
 										<li style="margin-top: 20px;" class="nav-item">
-											<h5 class="nav-link">{{ $t('Sidebar.Setting') }}</h5>
+											<h5 class="nav-link"
+												:style="currentTheme === 'dark' ? 'color: rgb(234, 234, 234)' : 'color: black'">
+												{{ $t('Sidebar.Setting') }}</h5>
 										</li>
 										<li>
 											<img src="/image/Earth_icon.svg" style="width: 25px; margin-right: 13px;" />
 											<button style="padding: 0;" class="btn dropdown-toggle" type="button"
-												id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+												id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false"
+												:style="currentTheme === 'dark' ? 'color: rgb(255, 255, 255)' : ''">
 												{{ $t('Sidebar.Language') }}
 											</button>
 											<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -80,10 +109,8 @@
 					</nav>
 
 					<!--top-->
-
-
-
-					<div class="logo_col">
+					<div class="logo_col"
+						:style="currentTheme === 'dark' ? 'background-color: rgb(58, 58, 58)' : 'background-color: rgb(255, 255, 255)'">
 						<div class="logo" v-for="logo in filteredLogos" :key="logo.key"
 							:class="{ active: selectedLogoKey === logo.key }">
 							<a :href="'#'" @click.prevent="handleLogoClick(logo.key)">
@@ -92,9 +119,12 @@
 						</div>
 					</div>
 
-					<a class="refresh-icon" style="position: relative; " @click="refresh">
+					<a class="refresh-icon"
+						:style="currentTheme === 'dark' ? 'background-color: #007BD2' : 'background-color: #FFFFFF;'"
+						style="position: relative; " @click="refresh">
 						<div style="position: absolute; right: 12px; top: 4px; transform: rotateZ(50deg);">
-							<a class="refresh-arrow" href="#">
+							<a class="refresh-arrow"
+								:style="currentTheme === 'dark' ? 'color: #FFFFFF' : 'color: #007BD2'" href="#">
 								&#8635;
 							</a>
 						</div>
@@ -103,7 +133,7 @@
 					<div class="Theme_Switch_Button"
 						:class="currentTheme === 'dark' ? 'DT_Theme_Button' : 'LT_Theme_Button'">
 						<button @click="toggleTheme"
-							:style="currentTheme === 'dark' ? 'color: rgb(207, 46, 46)' : 'color: black'">
+							:style="currentTheme === 'dark' ? 'color: rgb(0, 123, 210)' : 'color: black'">
 							{{ currentTheme === 'dark' ? $t('Theme.Dark') : $t('Theme.Light') }}
 						</button>
 					</div>
@@ -451,7 +481,7 @@ export default {
 	font-size: 14px;
 	padding-bottom: 6px;
 	padding-top: 6px;
-	color: rgb(0, 0, 0) !important;
+	color: rgb(0, 0, 0);
 	font-weight: 700;
 }
 
@@ -462,15 +492,7 @@ export default {
 
 .nav-link {
 	display: flex;
-}
-
-.nav-link h5 {
-	margin: 0;
-	font-size: 1.25rem;
-	padding-bottom: 20px;
-	padding-top: 6px;
-	color: rgb(243, 6, 6) !important;
-	font-weight: 700;
+	width: 100%;
 }
 
 .navbar-nav .nav-link img {
@@ -531,7 +553,7 @@ export default {
 }
 
 .active {
-	color: #007BD2 !important;
+	color: #007BD2;
 	font-weight: 700;
 }
 
