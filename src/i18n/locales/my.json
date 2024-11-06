@@ -49,5 +49,9 @@
 		"result": "rekod",
 		"for": "untuk",
 		"No_Result": "Tiada Keputusan Ditemui Untuk Julat Ini"
+	},
+	"Theme": {
+		"Light": "Tema Terang",
+		"Dark": "Tema Gelap"
 	}
 }

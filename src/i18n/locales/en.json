@@ -49,5 +49,9 @@
 		"result": "result",
 		"for": "for",
 		"No_Result": "No Result Found For This Range"
+	},
+	"Theme": {
+		"Light": "Light Theme",
+		"Dark": "Dark Theme"
 	}
 }

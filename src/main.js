@@ -4,6 +4,7 @@ import router from './router'; // Assuming you have a router setup
 import moment from 'moment';
 import i18n from './i18n'; // Import the i18n instance
 import { Swiper, SwiperSlide } from 'swiper/vue';
+import store from './store';
 import 'swiper/swiper-bundle.css';
 import VueLazyload from 'vue-lazyload';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -25,6 +26,8 @@ app.use(router);
 
 // Use i18n for internationalization
 app.use(i18n);
+
+app.use(store);
 
 // Use VueLazyload for lazy loading images
 app.use(VueLazyload, {

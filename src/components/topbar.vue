@@ -99,6 +99,15 @@
 							</a>
 						</div>
 					</a>
+
+					<div class="Theme_Switch_Button"
+						:class="currentTheme === 'dark' ? 'DT_Theme_Button' : 'LT_Theme_Button'">
+						<button @click="toggleTheme"
+							:style="currentTheme === 'dark' ? 'color: rgb(207, 46, 46)' : 'color: black'">
+							{{ currentTheme === 'dark' ? $t('Theme.Dark') : $t('Theme.Light') }}
+						</button>
+					</div>
+
 					<div class="dropdown language-button">
 						<button class="btn" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown"
 							aria-expanded="false">
@@ -120,6 +129,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 
 export default {
 	name: 'TopBar',
@@ -173,6 +183,10 @@ export default {
 	methods: {
 		refresh() {
 			this.$emit('refreshData');
+		},
+		toggleTheme() {
+			const newTheme = this.currentTheme === 'light' ? 'dark' : 'light';
+			this.$store.dispatch('changeTheme', newTheme); // Dispatch action to change theme
 		},
 		changeLanguage(lang) {
 			this.$i18n.locale = lang;
@@ -246,6 +260,7 @@ export default {
 		getImageForRoute() {
 			return this.images[this.currentRoute] || '/image/dashboard-topbar.svg'; // Default image path
 		},
+		...mapGetters(['currentTheme']),
 	}
 };
 </script>
@@ -537,5 +552,17 @@ export default {
 .logo_col .logo.active {
 	border: 2px solid #6EC1E4;
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+}
+
+.Theme_Switch_Button {
+	background-color: var(--background-color);
+	border: var(--border);
+	border-radius: 10px;
+	padding: 2px 4px;
+}
+
+.Theme_Switch_Button button {
+	background-color: transparent;
+	border: 0;
 }
 </style>
