@@ -6,7 +6,7 @@
 	"scripts": {
 		"dev": "vite --host",
 		"build": "vite build",
-		"preview": "vite preview"
+		"preview": "vite preview --host"
 	},
 	"dependencies": {
 		"@popperjs/core": "^2.11.8",
@@ -30,6 +30,7 @@
 	},
 	"devDependencies": {
 		"@vitejs/plugin-vue": "^5.0.4",
+		"terser": "^5.31.6",
 		"vite": "^5.3.1"
 	}
 }
