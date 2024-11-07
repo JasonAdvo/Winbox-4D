@@ -27,9 +27,33 @@
 				</a>
 			</div>
 			<div class="draw-results">
-				<div v-for="(drawObj, index) in data" :key="index" :id="`totoType${index}`"
-					class="draw-section white-bg" style="min-height:500px">
-					<div class="top-card-container" :style="{ backgroundColor: getBgColor(index) }">
+				<div v-for="(drawObj, index) in data" :key="index" :id="`totoType${index}`" class="draw-section"
+					:class="currentTheme === 'dark' ? 'DT_Card' : 'LT_Card', currentTheme === 'dark' ? cardTheme[index].darkThemeClassforCard : ''"
+					style="min-height:500px">
+					<div class="top-card-container"
+						:class="currentTheme === 'dark' ? cardTheme[index].darkThemeClassforCardTS : cardTheme[index].lightThemeClassforCardTS">
+						<div class="mobile-menu-page-button-container"
+							style="color: white; position: absolute; left: 0;">
+							<div class="menu-icon">
+								<button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
+									data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar"
+									aria-label="Toggle navigation">
+									<span class="navbar-toggler-icon"></span>
+								</button>
+							</div>
+						</div>
+
+						<div class="mobile-refresh-page-button-container"
+							style="color: white; position: absolute; right: 0;">
+							<div class="refresh-icon">
+								<div style="position: absolute; top: -3px; right: 5px; transform: rotateZ(75deg);">
+									<a class="refresh-arrow" @click="refreshPage(index)">
+										&#8635;
+									</a>
+								</div>
+							</div>
+						</div>
+
 						<div class="draw-header">
 							<div class="logo-title-container">
 								<div class="logo-white-container">
@@ -42,7 +66,8 @@
 							</div>
 						</div>
 
-						<div class="draw-info">
+						<div class="draw-info"
+							:class="currentTheme === 'dark' ? 'DT_Draw_Info_Container' : 'LT_Draw_Info_Container'">
 							<div class="date-info" :class="{ 'time-info-fs-14px': !shouldHideTimeInfo(index) }">
 								<span>{{ $t('Dashboard.Date') }}</span>
 								<span>{{ drawObj.DD }}</span>
@@ -72,8 +97,9 @@
 										:style="getPrizeStyle(index)">
 										<span style="font-weight: 700;">{{ prize }}</span> {{ $t('Dashboard.prize') }}
 									</h2>
-									<div class="prize-number">
-										<div ref="dataContainer">
+									<div class="prize-number"
+										:class="currentTheme === 'dark' ? 'DT_Card_Number_Container' : ''">
+										<div ref=" dataContainer">
 											{{ getDisplayResult(drawObj['P' + (I + 1)]) }}
 										</div>
 									</div>
@@ -81,13 +107,14 @@
 							</div>
 
 							<div class="special special-section-min-height">
-								<h2 class="title-font-size small-title-top-bottom-padding b-r-10px"
-									:style="getSmallSectionStyle(index)">
+								<h2 class="special-section-title title-font-size small-title-top-bottom-padding b-r-10px"
+									:class="currentTheme === 'dark' ? cardTheme[index].darkThemeClassforCardSS : cardTheme[index].lightThemeClassforCardSS">
 									{{ $t('Dashboard.Special') }}
 								</h2>
 								<div class="special-numbers">
 									<div v-for="(number, I) in getSpecialNumbers(drawObj)" :key="I" class="number">
-										<div class="number-inner">
+										<div class="number-inner"
+											:class="currentTheme === 'dark' ? 'DT_Card_Number_Container' : ''">
 											<div ref="dataContainer">
 												{{ getDisplayResult(number) }}
 											</div>
@@ -98,10 +125,12 @@
 
 							<div class="consolation">
 								<h2 class="consolation-section-title title-font-size small-title-top-bottom-padding b-r-10px"
-									:style="getSmallSectionStyle(index)">{{ $t('Dashboard.Consolation') }}</h2>
+									:class="currentTheme === 'dark' ? cardTheme[index].darkThemeClassforCardSS : cardTheme[index].lightThemeClassforCardSS">
+									{{ $t('Dashboard.Consolation') }}</h2>
 								<div class="consolation-numbers">
 									<div v-for="(number, I) in getConsolationNumbers(drawObj)" :key="I" class="number">
-										<div class="number-inner">
+										<div class="number-inner"
+											:class="currentTheme === 'dark' ? 'DT_Card_Number_Container' : ''">
 											<div ref="dataContainer">
 												{{ getDisplayResult(number) }}
 											</div>
@@ -113,22 +142,26 @@
 							<div v-if="drawObj.JP1" class="jackpot">
 								<div class="jackpot-prize">
 									<h2 class="jackpot-section-title title-font-size small-title-top-bottom-padding jp-1-br-10px"
-										:style="getSmallSectionStyle(index)">{{ $t('Dashboard.4D Jackpot 1 Prize') }}
+										:class="currentTheme === 'dark' ? cardTheme[index].darkThemeClassforCardSS : cardTheme[index].lightThemeClassforCardSS">
+										{{ $t('Dashboard.4D Jackpot 1 Prize') }}
 									</h2>
-									<h2 class="jackpot-section-title title-font-size small-title-top-bottom-padding jp-2-br-10px "
-										:style="getSmallSectionStyle(index)">{{ $t('Dashboard.4D Jackpot 2 Prize') }}
+									<h2 class="jackpot-section-title title-font-size small-title-top-bottom-padding jp-2-br-10px"
+										:class="currentTheme === 'dark' ? cardTheme[index].darkThemeClassforCardSS : cardTheme[index].lightThemeClassforCardSS">
+										{{ $t('Dashboard.4D Jackpot 2 Prize') }}
 									</h2>
 								</div>
 								<div class="jackpot-prize">
 									<div class="amount">
-										<div class="number-inner">
+										<div class="number-inner"
+											:class="currentTheme === 'dark' ? 'DT_Card_Number_Container' : ''">
 											<div ref="dataContainer">
 												{{ getDisplayResult(drawObj.JP1) }}
 											</div>
 										</div>
 									</div>
 									<div class="amount">
-										<div class="number-inner">
+										<div class="number-inner"
+											:class="currentTheme === 'dark' ? 'DT_Card_Number_Container' : ''">
 											<div ref="dataContainer">
 												{{ getDisplayResult(drawObj.JP2) }}
 											</div>
@@ -147,6 +180,8 @@
 
 import axios from 'axios';
 import TopBar from '/src/components/topbar.vue';
+import { mapGetters } from 'vuex';
+
 
 export default {
 	components: {
@@ -163,93 +198,133 @@ export default {
 			cardTheme: {
 				M: {
 					name: "Magnum 4D",
-					bgColor: "black",
 					logoPath: "/image/Magnum@3x.png",
 					prizeSectionColor: "#F5C500",
 					prizeSectionTextColor: "black",
 					smallSectionColor: "black",
-					sectionTitleTextColor: "white"
+					sectionTitleTextColor: "white",
+					darkThemeClassforCard: "DT_Magnum_Card",
+					darkThemeClassforCardTS: "DT_Magnum_Card_TS",
+					lightThemeClassforCardTS: "LT_Magnum_Card_TS",
+					darkThemeClassforCardSS: "DT_Magnum_Card_Small_Section_Title_Container",
+					lightThemeClassforCardSS: "LT_Magnum_Card_Small_Section_Title_Container",
 				},
 				D: {
 					name: "DamaCai 1+3D",
-					bgColor: "#1C377B",
 					logoPath: "/image/damacai@3x.png",
 					prizeSectionColor: "#EC2024",
 					prizeSectionTextColor: "white",
 					smallSectionColor: "#1C377B",
-					sectionTitleTextColor: "white"
+					sectionTitleTextColor: "white",
+					darkThemeClassforCard: "DT_DMC_Card",
+					darkThemeClassforCardTS: "DT_DMC_Card_TS",
+					lightThemeClassforCardTS: "LT_DMC_Card_TS",
+					darkThemeClassforCardSS: "DT_DMC_Card_Small_Section_Title_Container",
+					lightThemeClassforCardSS: "LT_DMC_Card_Small_Section_Title_Container",
 				},
 				T: {
 					name: "SportsToto 4D",
-					bgColor: "#EC2024",
 					logoPath: "/image/toto@3x.png",
 					prizeSectionColor: "black",
 					prizeSectionTextColor: "white",
 					smallSectionColor: "#EC2024",
-					sectionTitleTextColor: "white"
+					sectionTitleTextColor: "white",
+					darkThemeClassforCard: "DT_ST_Card",
+					darkThemeClassforCardTS: "DT_ST_Card_TS",
+					lightThemeClassforCardTS: "LT_ST_Card_TS",
+					darkThemeClassforCardSS: "DT_ST_Card_Small_Section_Title_Container",
+					lightThemeClassforCardSS: "LT_ST_Card_Small_Section_Title_Container",
 				},
 				S: {
 					name: "Singapore 4D",
-					bgColor: "#0093D8",
 					logoPath: "/image/sgtoto@3x.png",
 					prizeSectionColor: "#1C377B",
 					prizeSectionTextColor: "white",
 					smallSectionColor: "#0093D8",
-					sectionTitleTextColor: "white"
+					sectionTitleTextColor: "white",
+					darkThemeClassforCard: "DT_SG_Card",
+					darkThemeClassforCardTS: "DT_SG_Card_TS",
+					lightThemeClassforCardTS: "LT_SG_Card_TS",
+					darkThemeClassforCardSS: "DT_SG_Card_Small_Section_Title_Container",
+					lightThemeClassforCardSS: "LT_SG_Card_Small_Section_Title_Container",
 				},
 				ST: {
 					name: "Sandakan 4D",
-					bgColor: "#F5C500",
 					logoPath: "/image/stc4d@3x.png",
 					prizeSectionColor: "#007A37",
 					prizeSectionTextColor: "white",
 					smallSectionColor: "#F5C500",
-					sectionTitleTextColor: "#007A37"
+					sectionTitleTextColor: "#007A37",
+					darkThemeClassforCard: "DT_SDK_Card",
+					darkThemeClassforCardTS: "DT_SDK_Card_TS",
+					lightThemeClassforCardTS: "LT_SDK_Card_TS",
+					darkThemeClassforCardSS: "DT_SDK_Card_Small_Section_Title_Container",
+					lightThemeClassforCardSS: "LT_SDK_Card_Small_Section_Title_Container",
 				},
 				SB: {
 					name: "Sabah 88 4D",
-					bgColor: "#EC2024",
 					logoPath: "/image/sabah88@3x.png",
 					prizeSectionColor: "#1D68A2",
 					prizeSectionTextColor: "white",
 					smallSectionColor: "#EC2024",
-					sectionTitleTextColor: "white"
+					sectionTitleTextColor: "white",
+					darkThemeClassforCard: "DT_Sabah_Card",
+					darkThemeClassforCardTS: "DT_Sabah_Card_TS",
+					lightThemeClassforCardTS: "LT_Sabah_Card_TS",
+					darkThemeClassforCardSS: "DT_Sabah_Card_Small_Section_Title_Container",
+					lightThemeClassforCardSS: "LT_Sabah_Card_Small_Section_Title_Container",
 				},
 				SW: {
 					name: "Special CashSweap",
-					bgColor: "#10A226",
 					logoPath: "/image/special cashsweep@3x.png",
 					prizeSectionColor: "#EC2024",
 					prizeSectionTextColor: "white",
 					smallSectionColor: "#10A226",
-					sectionTitleTextColor: "white"
+					sectionTitleTextColor: "white",
+					darkThemeClassforCard: "DT_SC_Card",
+					darkThemeClassforCardTS: "DT_SC_Card_TS",
+					lightThemeClassforCardTS: "LT_SC_Card_TS",
+					darkThemeClassforCardSS: "DT_SC_Card_Small_Section_Title_Container",
+					lightThemeClassforCardSS: "LT_SC_Card_Small_Section_Title_Container",
 				},
 				H: {
 					name: "Lucky Hari Hari",
-					bgColor: "#1A81BB",
 					logoPath: "/image/LHH@3x.png",
 					prizeSectionColor: "#1C377B",
 					prizeSectionTextColor: "white",
 					smallSectionColor: "#1A81BB",
-					sectionTitleTextColor: "white"
+					sectionTitleTextColor: "white",
+					darkThemeClassforCard: "DT_LHH_Card",
+					darkThemeClassforCardTS: "DT_LHH_Card_TS",
+					lightThemeClassforCardTS: "LT_LHH_Card_TS",
+					darkThemeClassforCardSS: "DT_LHH_Card_Small_Section_Title_Container",
+					lightThemeClassforCardSS: "LT_LHH_Card_Small_Section_Title_Container",
 				},
 				P: {
 					name: "Perdana Lottery",
-					bgColor: "#1A81BB",
 					logoPath: "/image/Perdana Lottery @3x.png",
 					prizeSectionColor: "#EC2024",
 					prizeSectionTextColor: "white",
 					smallSectionColor: "#1A81BB",
-					sectionTitleTextColor: "white"
+					sectionTitleTextColor: "white",
+					darkThemeClassforCard: "DT_PL_Card",
+					darkThemeClassforCardTS: "DT_PL_Card_TS",
+					lightThemeClassforCardTS: "LT_PL_Card_TS",
+					darkThemeClassforCardSS: "DT_PL_Card_Small_Section_Title_Container",
+					lightThemeClassforCardSS: "LT_PL_Card_Small_Section_Title_Container",
 				},
 				G: {
 					name: "Grand Dragon 4D",
-					bgColor: "#EC2024",
 					logoPath: "/image/grand dragon 4d@3x.png",
 					prizeSectionColor: "#F5C500",
 					prizeSectionTextColor: "black",
 					smallSectionColor: "#EC2024",
-					sectionTitleTextColor: "white"
+					sectionTitleTextColor: "white",
+					darkThemeClassforCard: "DT_GD_Card",
+					darkThemeClassforCardTS: "DT_GD_Card_TS",
+					lightThemeClassforCardTS: "LT_GD_Card_TS",
+					darkThemeClassforCardSS: "DT_GD_Card_Small_Section_Title_Container",
+					lightThemeClassforCardSS: "LT_GD_Card_Small_Section_Title_Container",
 				}
 			},
 			activeIndex: null,
@@ -271,6 +346,7 @@ export default {
 	mounted() {
 		this.fetchData();
 		this.updateTimeText();
+		this.restoreScrollPosition();
 		// 监听滚动事件
 		this.$refs.dashboard.addEventListener('scroll', this.handleScroll);;
 		this.intervalId = setInterval(this.checkTime, 1000);
@@ -369,8 +445,11 @@ export default {
 				this.currentTimeText = "7:30pm";
 			}
 		},
-		getBgColor(type) {
-			return this.cardTheme[type].bgColor;
+		formatDate(dateStr) {
+			return dateStr;
+		},
+		getBorder(type) {
+			return this.cardTheme[type].darkThemeClassforCard;
 		},
 		getPrizeStyle(type) {
 			return {
@@ -380,12 +459,6 @@ export default {
 		},
 		getSectionTitleTextColor(type) {
 			return this.cardTheme[type].sectionTitleTextColor;
-		},
-		getSmallSectionStyle(type) {
-			return {
-				backgroundColor: this.cardTheme[type].smallSectionColor,
-				color: this.cardTheme[type].sectionTitleTextColor
-			};
 		},
 		getDisplayResult(number) {
 			return number;
@@ -437,6 +510,26 @@ export default {
 			localStorage.setItem('cardId', cardId);
 			// Reload the page
 			window.location.reload();
+		},
+		restoreScrollPosition() {
+			// Get the saved card ID from localStorage
+			const cardId = localStorage.getItem('cardId');
+
+			if (cardId) {
+				this.$nextTick(() => {
+					const checkElement = () => {
+						const element = document.getElementById(cardId);
+						if (element) {
+							element.scrollIntoView({ behavior: 'smooth' });
+							// Clear the card ID from localStorage
+							localStorage.removeItem('cardId');
+						} else {
+							setTimeout(checkElement, 100); // Retry after 100ms
+						}
+					};
+					setTimeout(checkElement, 100); // Initial delay to ensure full rendering
+				});
+			}
 		},
 		handleImageClick(index) {
 			this.activeIndex = index;
@@ -493,7 +586,8 @@ export default {
 			} else {
 				return this.images.filter(image => image.key !== 'H1' && image.key !== 'PL1');
 			}
-		}
+		},
+		...mapGetters(['currentTheme']),
 	}
 };
 </script>
@@ -562,7 +656,7 @@ export default {
 }
 
 .navbar-toggler {
-	color: #6EC1E4;
+	color: #CF2E2E;
 	border: none;
 }
 
@@ -615,7 +709,7 @@ export default {
 }
 
 .image-container.active {
-	border: 2px solid #6EC1E4;
+	border: 2px solid rgb(207, 46, 46);
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
 }
 
@@ -682,6 +776,8 @@ export default {
 	border-radius: 0 0 50px 50px;
 	padding-top: 70px;
 	position: relative;
+	outline: var(--outline);
+	background-color: var(--background-color);
 }
 
 @media (min-width: 768px) {
@@ -701,7 +797,9 @@ export default {
 .draw-section {
 	margin-bottom: 40px;
 	width: 100%;
+	background-color: var(--background-color);
 	/* height: 100%; */
+	border: var(--border);
 }
 
 @media screen and (min-width: 320px) {
@@ -773,17 +871,22 @@ export default {
 .draw-info {
 	display: flex;
 	justify-content: center;
-	background-color: white;
+	background-color: var(--background-color);
+	color: var(--color);
 	margin-top: 2px;
 	margin-inline: 20px;
 	border-radius: 17px;
 	box-shadow: rgba(0, 0, 0, 0.2) 2px 2px 6px;
+	z-index: 1;
+	border: var(--border);
 }
 
 .date-info {
 	display: flex;
 	flex-direction: column;
 	width: 140px;
+	color: var(--color);
+
 }
 
 .number-info {
@@ -792,9 +895,14 @@ export default {
 	width: 140px;
 }
 
+.number-info span {
+	color: var(--color);
+}
+
 .time-info {
 	display: flex;
 	flex-direction: column;
+	color: var(--color);
 }
 
 .divider {
@@ -805,6 +913,13 @@ export default {
 	border-color: rgb(138, 138, 138);
 	height: 30px;
 	margin: auto 15px;
+}
+
+.special-section-title,
+.consolation-section-title,
+.jackpot-section-title {
+	background-color: var(--background-color);
+	color: var(--color);
 }
 
 .special,
@@ -837,7 +952,8 @@ export default {
 	font-size: 24px;
 	font-weight: 700;
 	margin: 5px 0;
-	background: white;
+	background-color: var(--background-color);
+	color: var(--color);
 	border-radius: 10px;
 	box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 6px;
 }
@@ -862,7 +978,8 @@ export default {
 }
 
 .number-inner {
-	background: white;
+	background-color: var(--background-color);
+	color: var(--color);
 	border-radius: 5px;
 	box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 6px;
 	margin: 3px;

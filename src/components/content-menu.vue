@@ -7,7 +7,8 @@
 
 	<!-- Offcanvas Sidebar -->
 	<div class="offcanvas offcanvas-start offcanvas-custom-width border-top-bottom-right-80px width-sidebar"
-		tabindex="-1" id="offcanvasNavbar2" aria-labelledby="offcanvasNavbarLabel">
+		tabindex="-1" id="offcanvasNavbar2" aria-labelledby="offcanvasNavbarLabel"
+		:style="currentTheme === 'dark' ? 'background-color: rgb(58, 58, 58)' : 'background-color: rgb(255, 255, 255)'">
 		<div class="offcanvas-header">
 			<button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
 		</div>
@@ -19,40 +20,55 @@
 						<img class="d_num_logo" src="/image/Winbox_4D_Logo_v2.webp">
 					</div>
 				</router-link>
-				<li class="nav-item">
+				<li class="nav-item" :style="currentTheme === 'dark' ? 'color: rgb(234, 234, 234)' : 'color: black'">
 					<h5 class="nav-link">{{ $t('Sidebar.Result') }}</h5>
 				</li>
 				<li class="nav-item" :class="{ active: isActive('/') }">
-					<router-link class="nav-link" to="/" :class="{ active: isActive('/') }">
-						<img :src="getImageSrc('/', '/image/dashboard.webp', '/image/dashboard_Active.svg')"
+					<router-link class="nav-link" to="/" :class="[
+						{ active: isActive('/') },
+						currentTheme === 'dark' ? 'DT_Sidebar_Active_Text' : 'LT_Sidebar_Active_Text',
+						currentTheme === 'dark' ? 'DT_Sidebar_Active_Bar_M' : 'LT_Sidebar_Active_Bar_M'
+					]" :style="{ color: isActive('/') ? 'var(--color)' : 'var(--color)', fontWeight: isActive('/') ? '900' : '700' }">
+						<img :src="getImageSrc('/', '/image/dashboard.webp', currentTheme === 'dark' ? '/image/dashboard_Active_DT.svg' : '/image/dashboard_Active.svg')"
 							style="width: 25px; margin-right: 13px;" />
 						{{ $t('Sidebar.Dashboard') }}
 					</router-link>
 				</li>
-				<li style="margin-top: 20px;" class="nav-item">
+				<li style="margin-top: 20px;" class="nav-item"
+					:style="currentTheme === 'dark' ? 'color: rgb(234, 234, 234)' : 'color: black'">
 					<h5 class="nav-link">{{ $t('Sidebar.ToolBox') }}</h5>
 				</li>
 				<li class="nav-item">
-					<router-link class="nav-link" to="/spin-my-luck" :class="{ active: isActive('/spin-my-luck') }">
-						<img :src="getImageSrc('/spin-my-luck', '/image/spin.webp', '/image/spin_Active.svg')"
+					<router-link class="nav-link" to="/spin-my-luck" :class="[
+						{ active: isActive('/spin-my-luck') },
+						currentTheme === 'dark' ? 'DT_Sidebar_Active_Text' : 'LT_Sidebar_Active_Text',
+						currentTheme === 'dark' ? 'DT_Sidebar_Active_Bar_M' : 'LT_Sidebar_Active_Bar_M'
+					]" :style="{ color: `var(--color)`, fontWeight: '700' }">
+						<img :src="getImageSrc('/spin-my-luck', '/image/spin.webp', currentTheme === 'dark' ? '/image/spin_Active_DT.svg' : '/image/spin_Active.svg')"
 							style="width: 25px; margin-right: 13px;" />
 						{{ $t('Sidebar.Spin My Luck') }}
 					</router-link>
 				</li>
 				<li class="nav-item">
-					<router-link class="nav-link" to="/lucky-book" :class="{ active: isActive('/lucky-book') }">
-						<img :src="getImageSrc('/lucky-book', '/image/book.svg', '/image/book_Active.svg')"
+					<router-link class="nav-link" to="/lucky-book" :class="[
+						{ active: isActive('/lucky-book') },
+						currentTheme === 'dark' ? 'DT_Sidebar_Active_Text' : 'LT_Sidebar_Active_Text',
+						currentTheme === 'dark' ? 'DT_Sidebar_Active_Bar_M' : 'LT_Sidebar_Active_Bar_M'
+					]" :style="{ color: `var(--color)`, fontWeight: '700' }">
+						<img :src="getImageSrc('/lucky-book', '/image/book.svg', currentTheme === 'dark' ? '/image/book_Active_DT.svg' : '/image/book_Active.svg')"
 							style="width: 25px; margin-right: 13px;" />
 						{{ $t('Sidebar.Lucky Book') }}
 					</router-link>
 				</li>
-				<li style="margin-top: 20px;" class="nav-item">
+				<li style="margin-top: 20px;" class="nav-item"
+					:style="currentTheme === 'dark' ? 'color: rgb(234, 234, 234)' : 'color: black'">
 					<h5 class="nav-link">{{ $t('Sidebar.Setting') }}</h5>
 				</li>
 				<li class="nav-item">
 					<img src="/image/Earth_icon.svg" style="width: 25px; margin-right: 13px;" />
 					<button style="padding: 0;" class="btn dropdown-toggle" type="button" id="dropdownMenuButton"
-						data-bs-toggle="dropdown" aria-expanded="false">
+						data-bs-toggle="dropdown" aria-expanded="false"
+						:style="currentTheme === 'dark' ? 'color: white' : 'color: black'">
 						{{ $t('Sidebar.Language') }}
 					</button>
 					<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -61,17 +77,27 @@
 						<li><a class="dropdown-item" @click="changeLanguage('ms')">Malay</a></li>
 					</ul>
 				</li>
+
+				<li class="Theme_Switch_Button"
+					:class="currentTheme === 'dark' ? 'DT_Theme_Button' : 'LT_Theme_Button'">
+					<button @click="toggleTheme"
+						:style="currentTheme === 'dark' ? 'color: rgb(0, 123, 210) ' : 'color: black'">
+						{{ currentTheme === 'dark' ? $t('Theme.Dark') : $t('Theme.Light') }}
+					</button>
+				</li>
 			</ul>
 		</div>
 	</div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
 	name: 'Content-Menu',
 	data() {
 		return {
-
+			sidebarOpen: false
 		}
 	},
 	methods: {
@@ -86,6 +112,12 @@ export default {
 		},
 		getImageSrc(route, defaultImage, activeImage) {
 			return this.isActive(route) ? activeImage : defaultImage;
+		},
+		toggleTheme() {
+			const newTheme = this.currentTheme === 'light' ? 'dark' : 'light';
+			this.$store.dispatch('changeTheme', newTheme); // Dispatch action to change theme
+
+			this.sidebarOpen = true;
 		},
 	},
 	mounted() {
@@ -106,6 +138,9 @@ export default {
 			next();
 		});
 	},
+	computed: {
+		...mapGetters(['currentTheme']),
+	}
 }
 </script>
 
@@ -160,9 +195,14 @@ export default {
 	font-weight: 700;
 }
 
+.pic {
+	width: 20px;
+	height: 19px;
+}
+
 .active {
-	color: #007BD2 !important;
-	background-color: rgb(0, 123, 210, 0.2) !important;
+	color: #007BD2;
+	background-color: var(--background-color);
 	font-weight: 700;
 }
 
@@ -180,5 +220,20 @@ export default {
 .d_num_logo {
 	width: 60px;
 	height: auto;
+}
+
+.Theme_Switch_Button {
+	margin-top: 20px;
+	background-color: var(--background-color);
+	border: var(--border);
+	border-radius: 10px;
+	padding: 2px 4px;
+	width: 140px;
+	text-align: center;
+}
+
+.Theme_Switch_Button button {
+	background-color: transparent;
+	border: 0;
 }
 </style>

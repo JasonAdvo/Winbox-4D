@@ -1,15 +1,488 @@
 @import './base.css';
 
+:root {
+	--background-color: rgb(245, 245, 245);
+}
 
+.LT_Background {
+	--background-color: rgb(245, 245, 245);
+}
+
+/* Top Bar Dark Theme */
+.DT_Theme_Button {
+	--background-color: rgba(34, 34, 34, 255);
+	--border: 2px solid rgb(0, 123, 210) !important;
+}
+
+/* Website Background */
+.DT_Background {
+	--background-color: rgba(34, 34, 34, 255);
+}
 
 /* Top Bar Light Theme */
+.LT_Navbar {
+	--background-color: rgb(255, 255, 255);
+}
+
+.LT_Topbar {
+	--background-color: rgb(207, 46, 46);
+}
+
+.LT_Logo_Container {
+	--background-color: rgb(255, 255, 255);
+}
+
+.LT_Refresh_Icon_Container {
+	--background-color: #FFFFFF;
+}
+
+.LT_Refresh_Icon {
+	--color: rgb(207, 46, 46);
+}
+
 .LT_Theme_Button {
 	--background-color: #FFFFFF;
 	--border: 2px solid black;
 }
 
 /* Top Bar Dark Theme */
+.DT_Navbar {
+	--background-color: #464646
+}
+
+.DT_Topbar {
+	--background-color: rgba(34, 34, 34, 255);
+}
+
+.DT_Menu_Icon {
+	--background-color: rgb(207, 46, 46);
+}
+
+.DT_Refresh_Icon_Container {
+	--background-color: rgb(207, 46, 46);
+}
+
+.DT_Refresh_Icon {
+	--color: #FFFFFF;
+}
+
+.DT_Logo_Container {
+	--background-color: rgb(58, 58, 58);
+}
+
 .DT_Theme_Button {
 	--background-color: rgba(34, 34, 34, 255);
-	--border: 2px solid rgb(0, 123, 210);
+	--border: 2px solid rgb(207, 46, 46);
+
+}
+
+/* Left Side Bar & Navigation Bar (Tablet & Mobile) Light Theme */
+.LT_Sidebar {
+	--background-color: rgb(255, 255, 255);
+}
+
+.LT_Sidebar_Background {
+	--background-color: rgb(207, 46, 46);
+}
+
+.LT_Sidebar_Text {
+	--color: black;
+}
+
+.LT_Sidebar_Active_Bar {
+	--background-color: rgba(0, 123, 210, 0.2);
+}
+
+.LT_Sidebar_Active_Bar_M {
+	--background-color: rgba(0, 123, 210, 0.2);
+}
+
+.LT_Sidebar_Active_Text {
+	--color: rgb(0, 123, 210);
+}
+
+.LT_Sidebar_Close_Btn {
+	--background-color: white;
+}
+
+/* Left Side Bar & Navigation Bar (Tablet & Mobile) Dark Theme */
+.DT_Sidebar {
+	--background-color: rgb(58, 58, 58);
+}
+
+.DT_Sidebar_Background {
+	--background-color: rgba(34, 34, 34, 255);
+}
+
+.DT_Sidebar_Active_Text {
+	--color: rgb(255, 255, 255);
+}
+
+.DT_Sidebar_Active_Bar {
+	--background-color: rgb(0, 123, 210);
+}
+
+.DT_Sidebar_Active_Bar_M {
+	--background-color: rgb(0, 123, 210);
+}
+
+.DT_Sidebar_Text {
+	--color: rgb(234, 234, 234);
+}
+
+.DT_Sidebar_Close_Btn {
+	--background-color: rgb(0, 123, 210);
+}
+
+/* Right Special Date Section */
+.DT_RightSection {
+	--background-color: rgb(58, 58, 58);
+}
+
+.DT_RS_Title_Text {
+	--color: rgb(255, 255, 255);
+}
+
+.DT_RS_Small_Title_Text {
+	--color: rgb(233, 233, 233);
+}
+
+.DT_RS_Text {
+	--color: rgb(255, 255, 255);
+}
+
+/* General Card Background Light Theme */
+.LT_Card {
+	--background-color: white;
+}
+
+/* General Card Background */
+.DT_Card {
+	--background-color: black;
+}
+
+.DT_Card_Number_Container {
+	--background-color: rgb(28, 28, 28);
+	--color: white;
+	border: 0.5px solid rgb(70, 70, 70);
+}
+
+/* Draw Section Container Light Theme */
+.LT_Draw_Info_Container {
+	--background-color: white;
+	--color: black;
+}
+
+/* Draw Section Container Dark Theme */
+.DT_Draw_Info_Container {
+	--background-color: black;
+	--color: white;
+	--border: 0.5px solid rgb(70, 70, 70);
+}
+
+/* Magnum 4D Light Theme*/
+.LT_Magnum_Card_TS {
+	--background-color: black;
+	/* --outline: 3px solid rgb(245, 197, 0); */
+}
+
+.LT_Magnum_Card_Small_Section_Title_Container {
+	--background-color: black;
+	--color: white;
+}
+
+/* Magnum 4D Dark Theme*/
+.DT_Magnum_Card {
+	--border: 3px solid rgb(245, 197, 0);
+}
+
+.DT_Magnum_Card_TS {
+	--background-color: rgba(34, 34, 34, 255);
+	--outline: 3px solid rgb(245, 197, 0);
+}
+
+.DT_Magnum_Card_Small_Section_Title_Container {
+	--background-color: rgb(70, 70, 70);
+	--color: white;
+}
+
+/* Da Ma Cai 1+3D Light Theme*/
+.LT_DMC_Card_TS {
+	--background-color: rgb(28, 55, 123);
+	/* --outline: 3px solid rgb(43, 92, 214); */
+}
+
+.LT_DMC_Card_Small_Section_Title_Container {
+	--background-color: rgb(28, 55, 123);
+	--color: white;
+}
+
+/* Da Ma Cai 1+3D Dark Theme */
+.DT_DMC_Card {
+	--border: 3px solid rgb(43, 92, 214);
+}
+
+.DT_DMC_Card_TS {
+	--background-color: rgba(34, 34, 34, 255);
+	--outline: 3px solid rgb(43, 92, 214);
+}
+
+.DT_DMC_Card_Small_Section_Title_Container {
+	--background-color: rgb(43, 92, 214);
+	--color: white;
+}
+
+/* Sports Toto 4D Light Theme */
+.LT_ST_Card_TS {
+	--background-color: rgb(236, 32, 36);
+}
+
+.LT_ST_Card_Small_Section_Title_Container {
+	--background-color: rgb(236, 32, 36);
+	--color: white;
+}
+
+/* Sports Toto 4D Dark Theme */
+.DT_ST_Card {
+	--border: 3px solid rgb(236, 32, 36);
+}
+
+.DT_ST_Card_TS {
+	--background-color: rgba(34, 34, 34, 255);
+	--outline: 3px solid rgb(236, 32, 36);
+}
+
+.DT_ST_Card_Small_Section_Title_Container {
+	--background-color: rgb(236, 32, 36);
+	--color: white;
+}
+
+/* Singapore 4D Dark Theme */
+.LT_SG_Card_TS {
+	--background-color: rgb(0, 147, 216);
+}
+
+.LT_SG_Card_Small_Section_Title_Container {
+	--background-color: rgb(0, 147, 216);
+	--color: white;
+}
+
+/* Singapore 4D Dark Theme */
+.DT_SG_Card {
+	--border: 3px solid rgb(0, 147, 216);
+}
+
+.DT_SG_Card_TS {
+	--background-color: rgba(34, 34, 34, 255);
+	--outline: 3px solid rgb(0, 147, 216);
+}
+
+.DT_SG_Card_Small_Section_Title_Container {
+	--background-color: rgb(0, 147, 216);
+	--color: white;
+}
+
+/* Sandakan 4D Light Theme */
+.LT_SDK_Card_TS {
+	--background-color: rgb(245, 197, 0);
+}
+
+.LT_SDK_Card_Small_Section_Title_Container {
+	--background-color: rgb(245, 197, 0);
+	--color: white;
+}
+
+/* Sandakan 4D Dark Theme */
+.DT_SDK_Card {
+	--border: 3px solid rgb(245, 197, 0);
+}
+
+.DT_SDK_Card_TS {
+	--background-color: rgba(34, 34, 34, 255);
+	--outline: 3px solid rgb(245, 197, 0);
+}
+
+.DT_SDK_Card_Small_Section_Title_Container {
+	--background-color: rgb(245, 197, 0);
+	--color: white;
+}
+
+/* Sabah 88 4D Light Theme*/
+.LT_Sabah_Card_TS {
+	--background-color: rgb(236, 32, 36);
+}
+
+.LT_Sabah_Card_Small_Section_Title_Container {
+	--background-color: rgb(236, 32, 36);
+	--color: white;
+}
+
+/* Sabah 88 4D Dark Theme*/
+.DT_Sabah_Card {
+	--border: 3px solid rgb(236, 32, 36);
+}
+
+.DT_Sabah_Card_TS {
+	--background-color: rgba(34, 34, 34, 255);
+	--outline: 3px solid rgb(236, 32, 36);
+}
+
+.DT_Sabah_Card_Small_Section_Title_Container {
+	--background-color: rgb(236, 32, 36);
+	--color: white;
+}
+
+/* Special CashSweap Light Theme */
+.LT_SC_Card_TS {
+	--background-color: rgb(16, 162, 38);
+}
+
+.LT_SC_Card_Small_Section_Title_Container {
+	--background-color: rgb(16, 162, 38);
+	--color: white;
+}
+
+/* Special CashSweap Dark Theme */
+.DT_SC_Card {
+	--border: 3px solid rgb(16, 162, 38);
+}
+
+.DT_SC_Card_TS {
+	--background-color: rgba(34, 34, 34, 255);
+	--outline: 3px solid rgb(16, 162, 38);
+}
+
+.DT_SC_Card_Small_Section_Title_Container {
+	--background-color: rgb(16, 162, 38);
+	--color: white;
+}
+
+/* Grand Dragon 4D Light Theme */
+.LT_GD_Card_TS {
+	--background-color: rgb(236, 32, 36);
+}
+
+.LT_GD_Card_Small_Section_Title_Container {
+	--background-color: rgb(236, 32, 36);
+	--color: white;
+}
+
+/* Grand Dragon 4D Dark Theme */
+.DT_GD_Card {
+	--border: 3px solid rgb(236, 32, 36);
+}
+
+.DT_GD_Card_TS {
+	--background-color: rgba(34, 34, 34, 255);
+	--outline: 3px solid rgb(236, 32, 36);
+}
+
+.DT_GD_Card_Small_Section_Title_Container {
+	--background-color: rgb(236, 32, 36);
+	--color: white;
+}
+
+/* Lucky Hari Hari Light Theme */
+.LT_LHH_Card_TS {
+	--background-color: rgb(26, 129, 187);
+}
+
+.LT_LHH_Card_Small_Section_Title_Container {
+	--background-color: rgb(26, 129, 187);
+	--color: white;
+}
+
+/* Lucky Hari Hari Dark Theme */
+.DT_LHH_Card {
+	--border: 3px solid rgb(26, 129, 187);
+}
+
+.DT_LHH_Card_TS {
+	--background-color: rgba(34, 34, 34, 255);
+	--outline: 3px solid rgb(26, 129, 187);
+}
+
+.DT_LHH_Card_Small_Section_Title_Container {
+	--background-color: rgb(26, 129, 187);
+	--color: white;
+}
+
+/* Perdana Lottery Dark Theme */
+.LT_PL_Card_TS {
+	--background-color: rgb(29, 104, 162);
+}
+
+.LT_PL_Card_Small_Section_Title_Container {
+	--background-color: rgb(29, 104, 162);
+	--color: white;
+}
+
+/* Perdana Lottery Dark Theme */
+.DT_PL_Card {
+	--border: 3px solid rgb(29, 104, 162);
+}
+
+.DT_PL_Card_TS {
+	--background-color: rgba(34, 34, 34, 255);
+	--outline: 3px solid rgb(29, 104, 162);
+}
+
+.DT_PL_Card_Small_Section_Title_Container {
+	--background-color: rgb(29, 104, 162);
+	--color: white;
+}
+
+/* Spin My Luck Light Theme */
+.LT_Game_Background {
+	--background-color: white;
+}
+
+/* Spin My Luck Dark Theme */
+.DT_Game_Background {
+	--background-color: black;
+}
+
+/* Lucky Book Light Theme */
+.LT_Book_Background {
+	--background-color: white;
+}
+
+.LT_Book {
+	--background-color: white;
+}
+
+/* Lucky Book Dark Theme */
+.DT_Book_Background {
+	--background-color: rgba(34, 34, 34, 255);
+}
+
+.DT_Book {
+	--background-color: rgb(70, 70, 70);
+	--color: white;
+}
+
+/* Right Section Light Theme */
+.LT_Right_Background {
+	--background-color: white;
+}
+
+.LT_Text {
+	--color: rgb(118, 118, 118);
+}
+
+.LT_Text_2 {
+	--color: rgb(118, 118, 118);
+}
+
+/* Right Section Dark Theme */
+.DT_Right_Background {
+	--background-color: rgb(58, 58, 58);
+}
+
+.DT_Text {
+	--color: rgb(255, 255, 255);
+}
+
+.DT_Text_2 {
+	--color: rgb(233, 233, 233);
 }

@@ -2,8 +2,8 @@
 	<div class="scroll-container">
 		<div class="dashboard">
 			<div class="draw-results">
-				<div class="navbar">
-					<div v-for="(image, imageIndex) in images" :key="image.key" :id="`image-container-${image.key}`"
+				<div class="navbar" :class="currentTheme === 'dark' ? 'DT_Navbar' : 'LT_Navbar'">
+					<div v-for=" (image, imageIndex) in images" :key="image.key" :id="`image-container-${image.key}`"
 						:class="['image-container', `image-container-${image.key}`, { active: activeIndex === imageIndex }]"
 						@click="handleImageClick(imageIndex)">
 						<img :src="image.src" class="round-image" />
@@ -12,16 +12,20 @@
 				<swiper class="swiper-container" @init="onSwiperInit" ref="mySwiper" :slides-per-view="1"
 					:space-between="0" :allowTouchMove="true" :pagination="paginationConfig"
 					@slideChange="onSlideChange">
-					<swiper-slide v-for="(drawObj, index) in data" :key="index" :id="`totoType${index}`">
+					<swiper-slide class="draw-section" v-for="(drawObj, index) in data" :key="index"
+						:id="`totoType${index}`"
+						:class="currentTheme === 'dark' ? 'DT_Card' : 'LT_Card', currentTheme === 'dark' ? cardTheme[index].darkThemeClassforCard : ''">
 
 						<button class="content_btn" type="button" data-bs-toggle="offcanvas"
 							data-bs-target="#offcanvasNavbar2" aria-controls="offcanvasNavbar">
+							<!-- <span class="navbar-toggler-icon">&#9776</span> -->
 							<img class="dashboard_icon" src="/image/dashboard-topbar.svg" alt="dashboard icon"
-								:style="{ background: cardTheme[index].bgColor }">
+								:class="currentTheme === 'dark' ? cardTheme[index].darkThemeClassforCardTS : cardTheme[index].lightThemeClassforCardTS">
 						</button>
 
-						<div class="card">
-							<div class="top-card-container" :style="{ background: cardTheme[index].bgColor }">
+						<div class=" card" :class="currentTheme === 'dark' ? 'DT_Background' : 'LT_Background'">
+							<div class="top-card-container"
+								:class="currentTheme === 'dark' ? cardTheme[index].darkThemeClassforCardTS : cardTheme[index].lightThemeClassforCardTS">
 								<div class="mobile-refresh-page-button-container">
 									<div class="refresh-icon">
 										<div
@@ -45,7 +49,8 @@
 									</div>
 								</div>
 
-								<div class="draw-info">
+								<div class="draw-info"
+									:class="currentTheme === 'dark' ? 'DT_Draw_Info_Container' : 'LT_Draw_Info_Container'">
 									<div class="date-info">
 										<span>{{ $t('Dashboard.Date') }}</span>
 										<span>{{ drawObj.DD }}</span>
@@ -75,7 +80,8 @@
 											<span style="font-weight: 700;">{{ prize }}</span> {{ $t('Dashboard.prize')
 											}}
 										</h2>
-										<div class="prize-number">
+										<div class="prize-number"
+											:class="currentTheme === 'dark' ? 'DT_Card_Number_Container' : ''">
 											<div ref="dataContainer">
 												{{ getDisplayResult(drawObj['P' + (I + 1)]) }}
 											</div>
@@ -90,7 +96,8 @@
 									</h2>
 									<div class="special-numbers">
 										<div v-for="(number, I) in getSpecialNumbers(drawObj)" :key="I" class="number">
-											<div class="number-inner">
+											<div class="number-inner"
+												:class="currentTheme === 'dark' ? 'DT_Card_Number_Container' : ''">
 												<div ref="dataContainer">
 													{{ getDisplayResult(number) }}
 												</div>
@@ -105,7 +112,8 @@
 									<div class="consolation-numbers">
 										<div v-for="(number, I) in getConsolationNumbers(drawObj)" :key="I"
 											class="number">
-											<div class="number-inner">
+											<div class="number-inner"
+												:class="currentTheme === 'dark' ? 'DT_Card_Number_Container' : ''">
 												<div ref="dataContainer">
 													{{ getDisplayResult(number) }}
 												</div>
@@ -125,14 +133,16 @@
 									</div>
 									<div class="jackpot-prize">
 										<div class="amount">
-											<div class="number-inner">
+											<div class="number-inner"
+												:class="currentTheme === 'dark' ? 'DT_Card_Number_Container' : ''">
 												<div ref="dataContainer">
 													{{ getDisplayResult(drawObj.JP1) }}
 												</div>
 											</div>
 										</div>
 										<div class="amount">
-											<div class="number-inner">
+											<div class="number-inner"
+												:class="currentTheme === 'dark' ? 'DT_Card_Number_Container' : ''">
 												<div ref="dataContainer">
 													{{ getDisplayResult(drawObj.JP2) }}
 												</div>
@@ -147,52 +157,73 @@
 			</div>
 			<!-- Offcanvas Sidebar -->
 			<div class="offcanvas offcanvas-start offcanvas-custom-width border-top-bottom-right-80px width-sidebar"
-				tabindex="-1" id="offcanvasNavbar2" aria-labelledby="offcanvasNavbarLabel">
-				<div class="offcanvas-header">
-					<button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+				:class="[
+					{ 'show': sidebarOpen },
+					currentTheme === 'dark' ? 'DT_Sidebar' : 'LT_Sidebar']" tabindex="-1" id="offcanvasNavbar2"
+				aria-labelledby="offcanvasNavbarLabel">
+				<div class=" offcanvas-header">
+					<button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"
+						:class="currentTheme === 'dark' ? 'DT_Sidebar_Close_Btn' : 'LT_Sidebar_Close_Btn'"></button>
 				</div>
 				<div class="offcanvas-body">
 					<ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
 						<router-link to="/">
 							<div class="logo_col">
-								<img class="d_num_logo" src="/image/Winbox_4D_Logo_v2.webp">
+								<img class="d_num_logo" style="" src="/image/Winbox_4D_Logo_v2.webp">
+								<!-- <img class="d_num_title" width="100" src="/image/4D-lottery-wording.png"> -->
 							</div>
 						</router-link>
 						<li class="nav-item">
-							<h5 class="nav-link">{{ $t('Sidebar.Result') }}</h5>
+							<h5 class="nav-link"
+								:class="currentTheme === 'dark' ? 'DT_Sidebar_Text' : 'LT_Sidebar_Text'">{{
+									$t('Sidebar.Result') }}</h5>
 						</li>
 						<li class="nav-item">
-							<router-link class="nav-link" to="/" :class="{ Active: isActive('/') }">
-								<img :src="getImageSrc('/', '/image/dashboard.webp', '/image/dashboard_Active.svg')"
+							<router-link class="nav-link" to="/" :class="[
+								{ Active: isActive('/') },
+								currentTheme === 'dark' ? 'DT_Sidebar_Active_Text' : 'LT_Sidebar_Active_Text',
+								currentTheme === 'dark' ? 'DT_Sidebar_Active_Bar_M' : 'LT_Sidebar_Active_Bar_M'
+							]" :style="{ color: isActive('/') ? 'var(--color)' : '', fontWeight: isActive('/') ? '900' : '700' }">
+								<img :src="getImageSrc('/', '/image/dashboard.webp', currentTheme === 'dark' ? '/image/dashboard_Active_DT.svg' : '/image/dashboard_Active.svg')"
 									style="width: 25px; margin-right: 13px;" />
 								{{ $t('Sidebar.Dashboard') }}
 							</router-link>
 						</li>
 						<li style="margin-top: 20px;" class="nav-item">
-							<h5 class="nav-link">{{ $t('Sidebar.ToolBox') }}</h5>
+							<h5 class="nav-link"
+								:class="currentTheme === 'dark' ? 'DT_Sidebar_Text' : 'LT_Sidebar_Text'">{{
+									$t('Sidebar.ToolBox') }}</h5>
 						</li>
 						<li class="nav-item">
-							<router-link class="nav-link" to="/spin-my-luck"
-								:class="{ Active: isActive('/spin-my-luck') }">
-								<img :src="getImageSrc('/spin-my-luck', '/image/spin.webp', '/image/spin_Active.svg')"
+							<router-link class="nav-link" to="/spin-my-luck" :class="[
+								{ Active: isActive('/spin-my-luck') },
+								currentTheme === 'dark' ? 'DT_Sidebar_Active_Text' : 'LT_Sidebar_Active_Text',
+							]" :style="{ color: `var(--color)`, fontWeight: '700' }">
+								<img :src="getImageSrc('/spin-my-luck', '/image/spin.webp', currentTheme === 'dark' ? '/image/spin_Active_DT.svg' : '/image/spin_Active.svg')"
 									style="width: 25px; margin-right: 13px;" />
 								{{ $t('Sidebar.Spin My Luck') }}
 							</router-link>
 						</li>
 						<li class="nav-item">
-							<router-link class="nav-link" to="/lucky-book" :class="{ Active: isActive('/lucky-book') }">
-								<img :src="getImageSrc('/lucky-book', '/image/book.svg', '/image/book_Active.svg')"
+							<router-link class="nav-link" to="/lucky-book" :class="[
+								{ Active: isActive('/lucky-book') },
+								currentTheme === 'dark' ? 'DT_Sidebar_Active_Text' : 'LT_Sidebar_Active_Text',
+							]" :style="{ color: `var(--color)`, fontWeight: '700' }">
+								<img :src="getImageSrc('/lucky-book', '/image/book.svg', currentTheme === 'dark' ? '/image/book_Active_DT.svg' : '/image/book_Active.svg')"
 									style="width: 25px; margin-right: 13px;" />
 								{{ $t('Sidebar.Lucky Book') }}
 							</router-link>
 						</li>
 						<li style="margin-top: 20px;" class="nav-item">
-							<h5 class="nav-link">{{ $t('Sidebar.Setting') }}</h5>
+							<h5 class="nav-link"
+								:class="currentTheme === 'dark' ? 'DT_Sidebar_Text' : 'LT_Sidebar_Text'">{{
+									$t('Sidebar.Setting') }}</h5>
 						</li>
 						<li class="nav-item">
 							<img src="/image/Earth_icon.svg" style="width: 25px; margin-right: 13px;" />
 							<button style="padding: 0;" class="btn dropdown-toggle" type="button"
-								id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+								id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false"
+								:style="currentTheme === 'dark' ? 'color: white' : 'color: black'">
 								{{ $t('Sidebar.Language') }}
 							</button>
 							<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -200,6 +231,14 @@
 								<li><a class="dropdown-item" @click="changeLanguage('zh')">中文</a></li>
 								<li><a class="dropdown-item" @click="changeLanguage('ms')">Malay</a></li>
 							</ul>
+						</li>
+
+						<li class="Theme_Switch_Button"
+							:class="currentTheme === 'dark' ? 'DT_Theme_Button' : 'LT_Theme_Button'">
+							<button @click="toggleTheme"
+								:style="currentTheme === 'dark' ? 'color: rgb(0, 123, 210) ' : 'color: black'">
+								{{ currentTheme === 'dark' ? $t('Theme.Dark') : $t('Theme.Light') }}
+							</button>
 						</li>
 					</ul>
 				</div>
@@ -215,15 +254,11 @@ import { Swiper, SwiperSlide } from 'swiper/vue';
 import 'swiper/swiper-bundle.css'; // Import Swiper styles
 import axios from 'axios';
 import TopBar from '/src/components/topbar.vue';
-import ContentMenuD from '@/components/content-menu-D.vue'
-import ContentMenu from '@/components/content-menu.vue'
-// import { BCarousel, BCarouselSlide } from 'bootstrap-vue';
+import { mapGetters } from 'vuex';
 
 export default {
 	components: {
 		TopBar,
-		ContentMenu,
-		ContentMenuD,
 		Swiper,
 		SwiperSlide
 	},
@@ -250,64 +285,134 @@ export default {
 			},
 			cardTheme: {
 				M: {
-					name: "Magnum 4D", bgColor: "black",
-					logoPath: "/image/Magnum@3x.png", prizeSectionColor: "#F5C500",
-					prizeSectionTextColor: "black", smallSectionColor: "black",
-					sectionTitleTextColor: "white"
+					name: "Magnum 4D",
+					logoPath: "/image/Magnum@3x.png",
+					prizeSectionColor: "#F5C500",
+					prizeSectionTextColor: "black",
+					smallSectionColor: "black",
+					sectionTitleTextColor: "white",
+					darkThemeClassforCard: "DT_Magnum_Card",
+					darkThemeClassforCardTS: "DT_Magnum_Card_TS",
+					lightThemeClassforCardTS: "LT_Magnum_Card_TS",
+					darkThemeClassforCardSS: "DT_Magnum_Card_Small_Section_Title_Container",
+					lightThemeClassforCardSS: "LT_Magnum_Card_Small_Section_Title_Container",
 				},
 				D: {
-					name: "DamaCai 1+3D", bgColor: "#1C377B",
-					logoPath: "/image/damacai@3x.png", prizeSectionColor: "#EC2024",
-					prizeSectionTextColor: "white", smallSectionColor: "#1C377B",
-					sectionTitleTextColor: "white"
+					name: "DamaCai 1+3D",
+					logoPath: "/image/damacai@3x.png",
+					prizeSectionColor: "#EC2024",
+					prizeSectionTextColor: "white",
+					smallSectionColor: "#1C377B",
+					sectionTitleTextColor: "white",
+					darkThemeClassforCard: "DT_DMC_Card",
+					darkThemeClassforCardTS: "DT_DMC_Card_TS",
+					lightThemeClassforCardTS: "LT_DMC_Card_TS",
+					darkThemeClassforCardSS: "DT_DMC_Card_Small_Section_Title_Container",
+					lightThemeClassforCardSS: "LT_DMC_Card_Small_Section_Title_Container",
 				},
 				T: {
-					name: "SportsToto 4D", bgColor: "#EC2024",
-					logoPath: "/image/toto@3x.png", prizeSectionColor: "black",
-					prizeSectionTextColor: "white", smallSectionColor: "#EC2024",
-					sectionTitleTextColor: "white"
+					name: "SportsToto 4D",
+					logoPath: "/image/toto@3x.png",
+					prizeSectionColor: "black",
+					prizeSectionTextColor: "white",
+					smallSectionColor: "#EC2024",
+					sectionTitleTextColor: "white",
+					darkThemeClassforCard: "DT_ST_Card",
+					darkThemeClassforCardTS: "DT_ST_Card_TS",
+					lightThemeClassforCardTS: "LT_ST_Card_TS",
+					darkThemeClassforCardSS: "DT_ST_Card_Small_Section_Title_Container",
+					lightThemeClassforCardSS: "LT_ST_Card_Small_Section_Title_Container",
 				},
 				S: {
-					name: "Singapore 4D", bgColor: "#0093D8",
-					logoPath: "/image/sgtoto@3x.png", prizeSectionColor: "#1C377B",
-					prizeSectionTextColor: "white", smallSectionColor: "#0093D8",
-					sectionTitleTextColor: "white"
+					name: "Singapore 4D",
+					logoPath: "/image/sgtoto@3x.png",
+					prizeSectionColor: "#1C377B",
+					prizeSectionTextColor: "white",
+					smallSectionColor: "#0093D8",
+					sectionTitleTextColor: "white",
+					darkThemeClassforCard: "DT_SG_Card",
+					darkThemeClassforCardTS: "DT_SG_Card_TS",
+					lightThemeClassforCardTS: "LT_SG_Card_TS",
+					darkThemeClassforCardSS: "DT_SG_Card_Small_Section_Title_Container",
+					lightThemeClassforCardSS: "LT_SG_Card_Small_Section_Title_Container",
 				},
 				ST: {
-					name: "Sandakan 4D", bgColor: "#F5C500",
-					logoPath: "/image/stc4d@3x.png", prizeSectionColor: "#007A37",
-					prizeSectionTextColor: "white", smallSectionColor: "#F5C500",
-					sectionTitleTextColor: "#007A37"
+					name: "Sandakan 4D",
+					logoPath: "/image/stc4d@3x.png",
+					prizeSectionColor: "#007A37",
+					prizeSectionTextColor: "white",
+					smallSectionColor: "#F5C500",
+					sectionTitleTextColor: "#007A37",
+					darkThemeClassforCard: "DT_SDK_Card",
+					darkThemeClassforCardTS: "DT_SDK_Card_TS",
+					lightThemeClassforCardTS: "LT_SDK_Card_TS",
+					darkThemeClassforCardSS: "DT_SDK_Card_Small_Section_Title_Container",
+					lightThemeClassforCardSS: "LT_SDK_Card_Small_Section_Title_Container",
 				},
 				SB: {
-					name: "Sabah 88 4D", bgColor: "#EC2024",
-					logoPath: "/image/sabah88@3x.png", prizeSectionColor: "#1D68A2",
-					prizeSectionTextColor: "white", smallSectionColor: "#EC2024",
-					sectionTitleTextColor: "white"
+					name: "Sabah 88 4D",
+					logoPath: "/image/sabah88@3x.png",
+					prizeSectionColor: "#1D68A2",
+					prizeSectionTextColor: "white",
+					smallSectionColor: "#EC2024",
+					sectionTitleTextColor: "white",
+					darkThemeClassforCard: "DT_Sabah_Card",
+					darkThemeClassforCardTS: "DT_Sabah_Card_TS",
+					lightThemeClassforCardTS: "LT_Sabah_Card_TS",
+					darkThemeClassforCardSS: "DT_Sabah_Card_Small_Section_Title_Container",
+					lightThemeClassforCardSS: "LT_Sabah_Card_Small_Section_Title_Container",
 				},
 				SW: {
-					name: "Special CashSweap", bgColor: "#10A226",
-					logoPath: "/image/special cashsweep@3x.png", prizeSectionColor: "#EC2024",
-					prizeSectionTextColor: "white", smallSectionColor: "#10A226",
-					sectionTitleTextColor: "white"
+					name: "Special CashSweap",
+					logoPath: "/image/special cashsweep@3x.png",
+					prizeSectionColor: "#EC2024",
+					prizeSectionTextColor: "white",
+					smallSectionColor: "#10A226",
+					sectionTitleTextColor: "white",
+					darkThemeClassforCard: "DT_SC_Card",
+					darkThemeClassforCardTS: "DT_SC_Card_TS",
+					lightThemeClassforCardTS: "LT_SC_Card_TS",
+					darkThemeClassforCardSS: "DT_SC_Card_Small_Section_Title_Container",
+					lightThemeClassforCardSS: "LT_SC_Card_Small_Section_Title_Container",
 				},
 				H: {
-					name: "Lucky Hari Hari", bgColor: "#1A81BB",
-					logoPath: "/image/LHH@3x.png", prizeSectionColor: "#1C377B",
-					prizeSectionTextColor: "white", smallSectionColor: "#1A81BB",
-					sectionTitleTextColor: "white"
+					name: "Lucky Hari Hari",
+					logoPath: "/image/LHH@3x.png",
+					prizeSectionColor: "#1C377B",
+					prizeSectionTextColor: "white",
+					smallSectionColor: "#1A81BB",
+					sectionTitleTextColor: "white",
+					darkThemeClassforCard: "DT_LHH_Card",
+					darkThemeClassforCardTS: "DT_LHH_Card_TS",
+					lightThemeClassforCardTS: "LT_LHH_Card_TS",
+					darkThemeClassforCardSS: "DT_LHH_Card_Small_Section_Title_Container",
+					lightThemeClassforCardSS: "LT_LHH_Card_Small_Section_Title_Container",
 				},
 				P: {
-					name: "Perdana Lottery", bgColor: "#1A81BB",
-					logoPath: "/image/Perdana Lottery @3x.png", prizeSectionColor: "#EC2024",
-					prizeSectionTextColor: "white", smallSectionColor: "#1A81BB",
-					sectionTitleTextColor: "white"
+					name: "Perdana Lottery",
+					logoPath: "/image/Perdana Lottery @3x.png",
+					prizeSectionColor: "#EC2024",
+					prizeSectionTextColor: "white",
+					smallSectionColor: "#1A81BB",
+					sectionTitleTextColor: "white",
+					darkThemeClassforCard: "DT_PL_Card",
+					darkThemeClassforCardTS: "DT_PL_Card_TS",
+					lightThemeClassforCardTS: "LT_PL_Card_TS",
+					darkThemeClassforCardSS: "DT_PL_Card_Small_Section_Title_Container",
+					lightThemeClassforCardSS: "LT_PL_Card_Small_Section_Title_Container",
 				},
 				G: {
-					name: "Grand Dragon 4D", bgColor: "#EC2024",
-					logoPath: "/image/grand dragon 4d@3x.png", prizeSectionColor: "#F5C500",
-					prizeSectionTextColor: "black", smallSectionColor: "#EC2024",
-					sectionTitleTextColor: "white"
+					name: "Grand Dragon 4D",
+					logoPath: "/image/grand dragon 4d@3x.png",
+					prizeSectionColor: "#F5C500",
+					prizeSectionTextColor: "black",
+					smallSectionColor: "#EC2024",
+					sectionTitleTextColor: "white",
+					darkThemeClassforCard: "DT_GD_Card",
+					darkThemeClassforCardTS: "DT_GD_Card_TS",
+					lightThemeClassforCardTS: "LT_GD_Card_TS",
+					darkThemeClassforCardSS: "DT_GD_Card_Small_Section_Title_Container",
+					lightThemeClassforCardSS: "LT_GD_Card_Small_Section_Title_Container",
 				}
 			},
 			activeIndex: 0,
@@ -323,6 +428,7 @@ export default {
 				{ key: 'H', src: '/image/LHH@3x.png' },
 				{ key: 'P', src: '/image/Perdana Lottery @3x.png' }
 			],
+			sidebarOpen: false
 		};
 	},
 	mounted() {
@@ -347,6 +453,9 @@ export default {
 	},
 	beforeDestroy() {
 		clearInterval(this.intervalId);
+	},
+	computed: {
+		...mapGetters(['currentTheme']),
 	},
 	methods: {
 		async fetchData() {
@@ -375,6 +484,12 @@ export default {
 			} catch (error) {
 				console.error("Error fetching data:", error);
 			}
+		},
+		toggleTheme() {
+			const newTheme = this.currentTheme === 'light' ? 'dark' : 'light';
+			this.$store.dispatch('changeTheme', newTheme); // Dispatch action to change theme
+
+			this.sidebarOpen = true;
 		},
 		shouldHideTimeInfo(key) {
 			const validKeys = ["H", "P"];
@@ -510,7 +625,7 @@ export default {
 </script>
 <style scoped>
 .card {
-	background: #fff;
+	background-color: var(--background-color);
 	text-align: center;
 	border: 0;
 }
@@ -520,6 +635,8 @@ export default {
 	flex-direction: column;
 	border-radius: 0 0 50px 50px;
 	position: relative;
+	background-color: var(--background-color);
+	outline: var(--outline);
 }
 
 .logo_col {
@@ -528,8 +645,8 @@ export default {
 }
 
 .d_num_logo {
-	width: 60px;
-	height: auto;
+	width: auto;
+	height: 80px;
 }
 
 .refresh-icon {
@@ -620,7 +737,7 @@ export default {
 	z-index: 2;
 	justify-content: space-around;
 	align-items: center;
-	background-color: white;
+	background-color: var(--background-color);
 	border-bottom-left-radius: 15px;
 	border-bottom-right-radius: 15px;
 	box-shadow: 0 3px 5px #0000001a;
@@ -714,26 +831,6 @@ export default {
 	background-color: white !important;
 }
 
-@media screen and (min-width: 320px) {
-	.draw-section {
-		border-radius: 20px;
-	}
-
-}
-
-@media screen and (min-width: 960px) {
-	.draw-section {
-		width: 400px !important;
-	}
-}
-
-@media screen and (min-width: 769px) {
-	.draw-section {
-		width: 370px;
-		border-radius: 20px;
-	}
-}
-
 .mobile-refresh-page-button-container {
 	padding-right: 20px;
 	color: white;
@@ -745,12 +842,14 @@ export default {
 .draw-info {
 	display: flex;
 	justify-content: center;
-	background-color: white;
-	/* z-index: 997; */
+	background-color: var(--background-color);
+	color: var(--color);
 	margin-top: 2px;
 	margin-inline: 20px;
 	border-radius: 17px;
 	box-shadow: rgba(0, 0, 0, 0.2) 2px 2px 6px;
+	z-index: 1;
+	border: var(--border);
 }
 
 .draw-info span {
@@ -836,7 +935,8 @@ export default {
 	font-weight: 700;
 	width: 100%;
 	margin: 5px;
-	background: white;
+	background-color: var(--background-color);
+	color: var(--color);
 	border-radius: 10px;
 	box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 6px;
 }
@@ -864,7 +964,7 @@ export default {
 .amount {
 	font-size: 18px;
 	font-weight: 700;
-	background: white;
+	/* background: white; */
 	border-radius: 5px;
 	/* box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 6px; */
 	width: 50%;
@@ -916,10 +1016,19 @@ export default {
 }
 
 .number-inner {
-	background: white;
+	background-color: var(--background-color);
+	color: var(--color);
 	border-radius: 5px;
 	box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 6px;
 	margin: 3px;
+}
+
+.draw-section {
+	background-color: var(--background-color);
+	/* height: 100%; */
+	border: var(--border);
+	border-bottom-right-radius: 10px;
+	border-bottom-left-radius: 10px;
 }
 
 .content_btn {
@@ -944,11 +1053,16 @@ export default {
 	margin: 50px 32px 0px 24px;
 	position: absolute;
 	right: 0;
+	background-color: var(--background-color)
 }
 
 .offcanvas-custom-width {
 	--bs-offcanvas-width: 320px;
 	/* Set your desired width here */
+}
+
+.offcanvas {
+	background-color: var(--background-color);
 }
 
 .offcanvas.offcanvas-start.border-top-bottom-right-80px.width-sidebar {
@@ -959,6 +1073,22 @@ export default {
 
 .nav-item h5 {
 	font-weight: 700;
+	color: var(--color);
+}
+
+.Theme_Switch_Button {
+	margin-top: 20px;
+	background-color: var(--background-color);
+	border: var(--border);
+	border-radius: 10px;
+	padding: 2px 4px;
+	width: 140px;
+	text-align: center;
+}
+
+.Theme_Switch_Button button {
+	background-color: transparent;
+	border: 0;
 }
 
 .active {
@@ -1017,8 +1147,8 @@ export default {
 }
 
 .Active {
-	color: #007BD2 !important;
-	background-color: rgb(0, 123, 210, 0.2) !important;
+	color: rgb(207, 46, 46);
+	background-color: var(--background-color);
 	font-weight: 700;
 }
 
@@ -1043,5 +1173,6 @@ export default {
 	width: 30px;
 	height: auto;
 	border-radius: 5px;
+	background-color: var(--background-color);
 }
 </style>
