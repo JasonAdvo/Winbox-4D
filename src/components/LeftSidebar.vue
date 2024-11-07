@@ -2,35 +2,43 @@
 	<div class="left-sidebar">
 		<div class="container-fluid">
 			<!--leftside-->
-			<div class="sidebar" style="background-color: #007BD2;">
-				<div style="background: white; height: 100%; border-top-right-radius: 50px;">
+			<div class="sidebar"
+				:style="currentTheme === 'dark' ? 'background-color: rgba(34, 34, 34, 255)' : 'background-color: #007BD2'">
+				<div :style="currentTheme === 'dark' ? 'background-color: rgb(58, 58, 58)' : 'background-color: rgb(255, 255, 255)'"
+					style="height: 100%; border-top-right-radius: 50px;">
 					<router-link to="/">
 						<div class="logo_col">
 							<img class="d_num_logo" src="/image/Winbox_4D_Logo_v2.webp">
 						</div>
 					</router-link>
 					<div class="sidebar-main">
-						<p class="results_install_app_text">{{ $t('Sidebar.Result') }}</p>
+						<p class="results_install_app_text"
+							:style="currentTheme === 'dark' ? 'color: rgb(234, 234, 234)' : 'color: black'">{{
+								$t('Sidebar.Result') }}</p>
 						<!-- Dashboard -->
 						<router-link to="/" exact active-class="active-link">
 							<div class="menu"
-								:style="{ backgroundColor: activeTab === 'dashboard' ? 'rgb(0, 123, 210, 0.2)' : '' }">
+								:style="{ backgroundColor: activeTab === 'dashboard' ? currentTheme === 'dark' ? 'rgb(0, 123, 210)' : 'rgb(0, 123, 210, 0.2)' : '' }">
 								<div class="text_col">
-									<img class="pic" :src="imageSrcForTab('dashboard')">
-									<p :style="{ color: activeTab === 'dashboard' ? '#007BD2' : '', fontWeight: activeTab === 'dashboard' ? '700' : 'normal' }"
+									<img :src="getImageSrc('/', '/image/dashboard.webp', currentTheme === 'dark' ? '/image/dashboard_Active_DT.svg' : '/image/dashboard_Active.svg')"
+										class="pic" />
+									<p :style="{ color: activeTab === 'dashboard' ? currentTheme === 'dark' ? 'white' : '#007BD2' : '', fontWeight: activeTab === 'dashboard' ? '900' : '700' }"
 										class="text_menu">{{ $t('Sidebar.Dashboard') }}</p>
 								</div>
 							</div>
 						</router-link>
 						<br>
-						<p class="toolbox_text">{{ $t('Sidebar.ToolBox') }}</p>
+						<p class="toolbox_text"
+							:style="currentTheme === 'dark' ? 'color: rgb(234, 234, 234)' : 'color: black'">{{
+								$t('Sidebar.ToolBox') }}</p>
 						<!-- Spin My Luck -->
 						<router-link to="/spin-my-luck" exact active-class="active-link">
 							<div class="menu"
-								:style="{ backgroundColor: activeTab === 'spin' ? 'rgb(0, 123, 210, 0.2)' : '' }">
+								:style="{ backgroundColor: activeTab === 'spin' ? currentTheme === 'dark' ? 'rgb(0, 123, 210)' : 'rgb(0, 123, 210, 0.2)' : '' }">
 								<div class="text_col">
-									<img class="pic" :src="imageSrcForTab('spin')">
-									<p :style="{ color: activeTab === 'spin' ? '#007BD2' : '', fontWeight: activeTab === 'spin' ? '700' : 'normal' }"
+									<img :src="getImageSrc('/spin-my-luck', '/image/spin.webp', currentTheme === 'dark' ? '/image/spin_Active_DT.svg' : '/image/spin_Active.svg')"
+										class="pic" />
+									<p :style="{ color: activeTab === 'spin' ? currentTheme === 'dark' ? 'white' : '#007BD2' : '', fontWeight: activeTab === 'spin' ? '900' : '700' }"
 										class="text_menu">{{ $t('Sidebar.Spin My Luck') }}</p>
 								</div>
 							</div>
@@ -39,10 +47,11 @@
 						<!-- Lucky Book -->
 						<router-link to="/lucky-book" exact active-class="active-link">
 							<div class="menu"
-								:style="{ backgroundColor: activeTab === 'book' ? 'rgb(0, 123, 210, 0.2)' : '' }">
+								:style="{ backgroundColor: activeTab === 'book' ? currentTheme === 'dark' ? 'rgb(0, 123, 210)' : 'rgb(0, 123, 210, 0.2)' : '' }">
 								<div class="text_col">
-									<img class="pic" :src="imageSrcForTab('book')">
-									<p :style="{ color: activeTab === 'book' ? '#007BD2' : '', fontWeight: activeTab === 'book' ? '700' : 'normal' }"
+									<img :src="getImageSrc('/lucky-book', '/image/book.svg', currentTheme === 'dark' ? '/image/book_Active_DT.svg' : '/image/book_Active.svg')"
+										class="pic" />
+									<p :style="{ color: activeTab === 'book' ? currentTheme === 'dark' ? 'white' : '#007BD2' : '', fontWeight: activeTab === 'book' ? '900' : '700' }"
 										class="text_menu">{{ $t('Sidebar.Lucky Book') }}</p>
 								</div>
 							</div>
@@ -55,6 +64,8 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
 	name: 'LeftBar',
 	data() {
@@ -87,11 +98,18 @@ export default {
 		}
 	},
 	computed: {
-		imageSrcForTab() {
-			return (tab) => {
-				return this.activeTab === tab ? this.activeImageSrc[tab] : this.imageSrc[tab];
+		...mapGetters(['currentTheme']),
+	},
+	methods: {
+		isActive(route) {
+			if (route === '/') {
+				return this.$route.path === route || this.$route.path === '/';
 			}
-		}
+			return this.$route.path.startsWith(route);
+		},
+		getImageSrc(route, defaultImage, activeImage) {
+			return this.isActive(route) ? activeImage : defaultImage;
+		},
 	}
 }
 </script>
