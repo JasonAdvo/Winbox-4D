@@ -12,7 +12,8 @@
 			</div>
 			<div style="text-align: -webkit-center;">
 				<div class="col-12 title_col">
-					<div class="title">
+					<div class="title"
+						:style="currentTheme === 'dark' ? 'background-color: rgba(34, 34, 34, 255)' : 'background-color: white'">
 						<div class="dictionary">
 							<p>{{ $t('LuckyBook.Tua Pek Kong (Qian) Dictionary') }}</p>
 						</div>
@@ -37,13 +38,18 @@
 							</div>
 						</div>
 
-						<div class="no-result-container" v-if="qzt.length === 0">
+						<div class="no-result-container" v-if="qzt.length === 0" :style="{
+							color: currentTheme === 'dark' ? 'white' : '',
+							backgroundColor: currentTheme === 'dark' ? 'rgb(70, 70, 70)' : 'white'
+						}">
 							{{ $t('LuckyBook.No_Result') }}
 						</div>
 
-						<div class="tuapekkong_col pekkong">
-							<div v-for="(item) in paginatedItems" :key="item.number" class="item-container">
-								<div class="number_col">
+						<div class="tuapekkong_col pekkong"
+							:style="currentTheme === 'dark' ? 'background-color: rgba(34, 34, 34, 255)' : 'background-color: white'">
+							<div v-for="(item) in paginatedItems" :key="item.number" class="item-container"
+								:style="currentTheme === 'dark' ? 'background-color: rgb(70, 70, 70)' : 'background-color: white'">
+								<div class="number_col" :style="currentTheme === 'dark' ? 'color: white' : ''">
 									<p>{{ item.number }}</p>
 								</div>
 								<div>
@@ -56,14 +62,18 @@
 											loading="lazy" />
 									</template>
 								</div>
-								<div class="item_content">
+								<div class="item_content" :style="currentTheme === 'dark' ? 'color: white' : ''">
 									<p>
 										{{ item.content[language] }}
 									</p>
 								</div>
-								<div v-if="filteredItems.length === 0 && !isLoadingItems && searchText.length > 0">No
-									results
-									found.
+								<div class="no-result-container"
+									v-if="filteredItems.length === 0 && !isLoadingItems && searchText.length > 0"
+									:style="{
+										color: currentTheme === 'dark' ? 'white' : '',
+										backgroundColor: currentTheme === 'dark' ? 'rgb(70, 70, 70)' : 'white'
+									}">
+									{{ $t('LuckyBook.No_results_found') }}
 								</div>
 							</div>
 						</div>
@@ -91,6 +101,7 @@ import qzt from '../assets/data/qzt.json';
 import ContentMenu from '@/components/content-menu.vue'
 import TopBar from '/src/components/topbar.vue';
 import { useI18n } from 'vue-i18n';
+import { mapGetters } from 'vuex';
 
 export default {
 	name: 'TuaPekKongQian',
@@ -150,6 +161,7 @@ export default {
 		language() {
 			return this.$i18n.locale;
 		},
+		...mapGetters(['currentTheme']),
 	},
 	mounted() {
 		this.loadData();

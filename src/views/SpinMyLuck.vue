@@ -10,7 +10,8 @@
 			</div>
 		</div>
 		<div style="text-align: -webkit-center; padding-left: 0px; padding-right: 0px;" class="col-12 spincol">
-			<div class="lucky_col">
+			<div class="lucky_col"
+				:style="currentTheme === 'dark' ? 'background-color: black' : 'background-color: white'">
 				<div class="luckyspin_bg">
 					<!--this is title-->
 
@@ -24,7 +25,8 @@
 							<div class="num4d">
 								<p>4D {{ $t('SpinMyLuck.NUMBER') }}</p>
 							</div>
-							<div class="spinner-column_bg">
+							<div class="spinner-column_bg"
+								:style="currentTheme === 'dark' ? 'background-color: black' : 'background-color: white'">
 								<div v-for="(column, columnIndex) in columns" :key="columnIndex" class="spinner-column">
 									<div v-for="number in column" :key="number" class="spinner-number"
 										:style="{ transform: 'translateY(' + spins[columnIndex] + 'px)' }">
@@ -43,7 +45,8 @@
 								<div class="num4d">
 									<p>6D {{ $t('SpinMyLuck.NUMBER') }}</p>
 								</div>
-								<div class="spinner-column_bg">
+								<div class="spinner-column_bg"
+									:style="currentTheme === 'dark' ? 'background-color: black' : 'background-color: white'">
 									<div v-for="(column, columnIndex) in columns2" :key="columnIndex"
 										class="spinner-column">
 										<div v-for="number in column" :key="number" class="spinner-number "
@@ -65,7 +68,8 @@
 								<div class="num4d">
 									<p>{{ $t('SpinMyLuck.JACKPOT NUMBER') }}</p>
 								</div>
-								<div class="spinner-column_bg">
+								<div class="spinner-column_bg"
+									:style="currentTheme === 'dark' ? 'background-color: black' : 'background-color: white'">
 									<div v-for="(column, columnIndex) in columns3" :key="columnIndex"
 										class="spinner-column">
 										<div v-for="number in column" :key="number" class="spinner-number"
@@ -97,9 +101,9 @@
 </template>
 
 <script>
-
 import TopBar from '/src/components/topbar.vue';
 import ContentMenu from '@/components/content-menu.vue'
+import { mapGetters } from 'vuex';
 
 export default {
 	components: {
@@ -166,6 +170,8 @@ export default {
 		buttonLabel3() {
 			return this.spinning3 ? 'Stop' : 'Spin';
 		},
+		...mapGetters(['currentTheme']),
+
 	},
 	mounted() {
 		// 监听滚动事件
@@ -625,6 +631,7 @@ export default {
 	border: 2px solid #6EC1E4;
 	margin: 0 3px;
 	border-radius: 10px;
+	background-color: white;
 }
 
 
