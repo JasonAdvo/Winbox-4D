@@ -1,5 +1,6 @@
 <template>
-	<div style="padding: 0px 0px 0px 0px; background-color: rgb(245, 245, 245);" class="container-fluid">
+	<div style="padding: 0px 0px 0px 0px;" class="container-fluid"
+		:style="currentTheme === 'dark' ? 'background-color: rgba(34, 34, 34, 255)' : 'background-color: rgb(245, 245, 245)'">
 		<div class="screen-mobile">
 			<div class="screen1024">
 				<div class="Leftside-bar">
@@ -21,6 +22,7 @@
 import LeftSidebar from './components/LeftSidebar.vue'
 import TopBar from './components/topbar.vue'
 import RightColumn from './components/right.vue'
+import { mapGetters } from 'vuex';
 
 export default {
 	name: 'App',
@@ -28,6 +30,9 @@ export default {
 		LeftSidebar,
 		TopBar,
 		RightColumn,
+	},
+	computed: {
+		...mapGetters(['currentTheme']),
 	}
 }
 </script>

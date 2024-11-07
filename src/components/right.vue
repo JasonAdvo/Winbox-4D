@@ -1,21 +1,24 @@
 <template>
 	<div class="right-column">
 		<div class="right">
-
-
-			<div class="right_col">
+			<div class="right_col"
+				:style="currentTheme === 'dark' ? 'background-color: rgb(58, 58, 58);' : 'background-color: white'">
 				<img class="ball_img" src="\image\realistic8ball.png">
 
 				<div class="right_col2">
-					<h6>{{ $t('Right.Special Draw Date') }}</h6>
-					<p style="padding-bottom: 10px; text-align: center;">{{ $t('Right.Upcoming Special Draw Date')
+					<h6 :style="currentTheme === 'dark' ? 'color: rgb(255, 255, 255)' : 'color: rgb(118, 118, 118)'">{{
+						$t('Right.Special Draw Date') }}
+					</h6>
+					<p :style="currentTheme === 'dark' ? 'color: rgb(233, 233, 233)' : 'color: rgb(118, 118, 118)'"
+						style="padding-bottom: 10px; text-align: center;">{{ $t('Right.Upcoming Special Draw Date')
 						}}</p>
 				</div>
 				<div class="special-draw-date" v-for="(dateObj, index) in specialDates" :key="index">
-					<p :class="{ 'expired': dateObj.expired }">
+					<p :style="currentTheme === 'dark' ? 'color: rgb(255, 255, 255)' : 'color: rgb(118, 118, 118)'"
+						:class="{ 'expired': dateObj.expired }">
 						• {{ formatDate(dateObj.date) }} ({{ $t('Right.Tue') }})
 					</p>
-					<hr>
+					<hr style="color: rgb(205, 205, 205);">
 				</div>
 			</div>
 		</div>
@@ -23,6 +26,8 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
 	name: 'RightColumn',
 	data() {
@@ -61,6 +66,9 @@ export default {
 			// Filter out expired dates
 			this.specialDates = this.specialDates.filter(dateObj => !dateObj.expired);
 		}
+	},
+	computed: {
+		...mapGetters(['currentTheme']),
 	}
 }
 </script>

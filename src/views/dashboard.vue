@@ -1,7 +1,8 @@
 <template>
 	<div>
 		<!-- Loading Screen -->
-		<div v-if="showLoadingScreen" class="loading-screen">
+		<div v-if="showLoadingScreen" class="loading-screen"
+			:style="currentTheme === 'dark' ? 'background-color: rgba(34, 34, 34, 255)' : 'background-color: rgb(245, 245, 245)'">
 			<div class="Mobile-topbar">
 				<TopBar />
 			</div>
@@ -24,6 +25,7 @@
 import MobileView from '/src/components/dashboard_Mobile.vue';
 import DesktopView from '/src/components/dashboard_Web.vue';
 import TopBar from '/src/components/topbar.vue';
+import { mapGetters } from 'vuex';
 
 export default {
 	data() {
@@ -80,6 +82,10 @@ export default {
 			}, 50); // Update every 50ms
 		}
 	},
+	computed: {
+		...mapGetters(['currentTheme']),
+
+	}
 };
 </script>
 
@@ -102,7 +108,7 @@ export default {
 	align-items: center;
 	/* background-color: white; */
 	/* or any other background color */
-	z-index: 9999;
+	/* z-index: 9999; */
 	/* To ensure it is on top of other elements */
 }
 
